@@ -1,15 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://calxyocv23k57"]
+[gd_scene load_steps=3 format=3 uid="uid://calxyocv23k57"]
 
-[ext_resource type="PackedScene" uid="uid://cgu8a2wubriu1" path="res://Scenes/Gui.tscn" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://cj8nbq2ybtlvj" path="res://Scenes/MainMenu.tscn" id="1_idj7w"]
+[ext_resource type="PackedScene" uid="uid://dl714aslwluwu" path="res://Scenes/Game.tscn" id="2_kln2b"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Main screen" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="MainMenu" parent="." instance=ExtResource("1_idj7w")]
 
-[node name="Game" type="Node2D" parent="."]
-
-[node name="Gui" parent="Game" instance=ExtResource("1_r150o")]
+[node name="Game" parent="." instance=ExtResource("2_kln2b")]
