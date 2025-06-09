@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b4ahrc4wawpea"]
+[gd_scene load_steps=20 format=3 uid="uid://b4ahrc4wawpea"]
 
 [ext_resource type="Texture2D" uid="uid://c3qlk3rpevxo7" path="res://assets/sprites/player/prototype_character.png" id="1_pq8s5"]
 
@@ -142,9 +142,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pq8s5"]
+size = Vector2(10, 12.63)
+
+[node name="Player" type="CharacterBody2D"]
+floor_stop_on_slope = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8el8x")
-animation = &"walk_up"
-frame_progress = 0.654051
+animation = &"d_down"
+autoplay = "d_down"
+frame_progress = 0.990476
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.23)
+shape = SubResource("RectangleShape2D_pq8s5")

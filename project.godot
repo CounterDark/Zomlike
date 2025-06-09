@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Zomlike"
+run/main_scene="uid://cj6dn602r8leu"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/size/resizable=false
 
 [rendering]
 
