@@ -15,12 +15,25 @@ run/main_scene="uid://cj6dn602r8leu"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://scripts/data/globals.gd"
+PlayerStats="*res://scripts/data/player_stats.gd"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
 window/size/resizable=false
 
-[rendering]
+[dotnet]
 
-renderer/rendering_method="mobile"
+project/assembly_name="Zomlike"
+
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_2="Objects"
+2d_physics/layer_3="Projectiles"
+2d_physics/layer_4="Entities"
+2d_physics/layer_5="Map"

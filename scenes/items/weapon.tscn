@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://i7upl8y8xcqq"]
+
+[ext_resource type="Script" uid="uid://spkb2v06hxer" path="res://Scenes/levels/weapon.gd" id="1_vb8ur"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vb8ur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
+size = Vector2(8, 2)
+
+[node name="Weapon" type="RigidBody2D"]
+script = ExtResource("1_vb8ur")
+
+[node name="WeaponImage" type="Sprite2D" parent="."]
+position = Vector2(3.875, 0)
+scale = Vector2(8.25, 1.5)
+texture = SubResource("PlaceholderTexture2D_vb8ur")
+
+[node name="WeaponShape" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("RectangleShape2D_lr5ri")
+
+[node name="WeaponTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

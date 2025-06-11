@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://byv6ixi6qg4m"]
+
+[ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://Scenes/characters/Player.tscn" id="1_xlmfg"]
+[ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://Scenes/ui/control.tscn" id="2_04ab5"]
+
+[sub_resource type="GDScript" id="GDScript_7c221"]
+script/source = "extends Node2D
+class_name Level
+
+func _on_draw() -> void:
+	pass # Replace with function body.
+
+
+func _on_ready() -> void:
+	pass # Replace with function body.
+"
+
+[node name="Level" type="Node2D"]
+script = SubResource("GDScript_7c221")
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Weapons" type="Node2D" parent="."]
+
+[node name="Objects" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_xlmfg")]
+max_speed = null
+min_speed = null
+
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
+
+[node name="Control" parent="." instance=ExtResource("2_04ab5")]
+
+[connection signal="draw" from="." to="." method="_on_draw"]
+[connection signal="ready" from="." to="." method="_on_ready"]
