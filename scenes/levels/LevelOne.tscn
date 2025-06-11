@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddc3d474xeow"]
 
-[ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://Scenes/levels/Level.tscn" id="1_m8k37"]
+[ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://scenes/levels/Level.tscn" id="1_m8k37"]
 
 [sub_resource type="Gradient" id="Gradient_m8k37"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -14,7 +14,3 @@ gradient = SubResource("Gradient_m8k37")
 position = Vector2(-5.96046e-08, -4.47035e-08)
 scale = Vector2(0.0078125, 4)
 texture = SubResource("GradientTexture1D_j3ca7")
-
-[node name="Control" parent="." index="6"]
-grow_horizontal = 2
-grow_vertical = 2
