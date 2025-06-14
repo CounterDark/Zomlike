@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Globals="*res://scripts/data/globals.gd"
 PlayerStats="*res://scripts/data/player_stats.gd"
+Difficulty="*res://scripts/data/difficulty.gd"
 
 [display]
 
