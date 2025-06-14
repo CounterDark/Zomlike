@@ -22,12 +22,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * current_speed
-	rotation = direction.angle()
 	move_and_slide()
 	Globals.player_position = global_position
 	
 	if Input.is_action_pressed("primary action"):
-		equipped_weapon.attack()
+		if equipped_weapon != null:
+			equipped_weapon.attack()
 
 
 	
