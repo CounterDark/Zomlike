@@ -1,0 +1,2 @@
+Functionalities:
+ - Main menu

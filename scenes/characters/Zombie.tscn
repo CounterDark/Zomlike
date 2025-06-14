@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyo0ty6p06q2k"]
+
+[ext_resource type="Texture2D" uid="uid://xg2eu8w3j5vq" path="res://assets/sprites/enemies/zombie/zombie_sprite_-3.png.png" id="1_w2vhs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8x5d2"]
+size = Vector2(102, 143)
+
+[node name="Zombie" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w2vhs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_8x5d2")
