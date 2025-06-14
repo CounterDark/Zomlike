@@ -1,2 +1,3 @@
 Functionalities:
  - Main menu
+ - difficulty
