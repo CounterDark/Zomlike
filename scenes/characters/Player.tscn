@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://c3yic2no48nqc" path="res://scripts/characters/player.gd" id="1_vbm2w"]
 [ext_resource type="Texture2D" uid="uid://v1573obbqt2n" path="res://assets/sprites/player/character_sprite_1.png" id="2_gin2a"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7wym0"]
-size = Vector2(9, 11.8)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rr02n"]
+radius = 5.1
+height = 14.2
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(5, 5)
@@ -18,11 +19,16 @@ texture = ExtResource("2_gin2a")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 position = Vector2(0.1, -0.0999999)
-shape = SubResource("RectangleShape2D_7wym0")
+shape = SubResource("CapsuleShape2D_rr02n")
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="ReducedSpeedTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="CollisionTimer" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
 [connection signal="timeout" from="Timers/ReducedSpeedTimer" to="." method="_on_reduced_speed_timer_timeout"]
+[connection signal="timeout" from="Timers/CollisionTimer" to="." method="_on_collision_timer_timeout"]

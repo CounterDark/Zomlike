@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: int = 300
+@export var finding_speed: int = 300
 @export var damage : int = 10
 @export var crit_chance : float = 0.05
 @export var crit_multiplier : float = 1.5
@@ -18,9 +19,15 @@ func _ready():
 	
 
 func _physics_process(delta: float) -> void:
-	var next_path_pos: Vector2 = navigation_agent.get_next_path_position()
-	var direction: Vector2 = (next_path_pos - global_position).normalized()
-	velocity = direction * speed * delta
+	var direction: Vector2
+	if !enemy_nearby:
+		var next_path_pos: Vector2 = navigation_agent.get_next_path_position()
+		direction = (next_path_pos - global_position).normalized()
+		velocity = direction * finding_speed * delta
+	else:
+		direction = (Globals.player_position - position).normalized()
+		velocity = direction * speed * delta
+		
 	var collision : KinematicCollision2D = move_and_collide(velocity)
 	
 	if collision:
@@ -64,5 +71,4 @@ func _on_attack_timer_timeout() -> void:
 
 
 func _on_navigation_timer_timeout() -> void:
-	if enemy_nearby:
-		navigation_agent.target_position = Globals.player_position
+	navigation_agent.target_position = Globals.player_position

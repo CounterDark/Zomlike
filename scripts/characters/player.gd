@@ -5,6 +5,7 @@ class_name Player
 @export var min_speed: float = 40
 
 @onready var reduced_speed_timer : Timer = $Timers/ReducedSpeedTimer
+@onready var collision_timer : Timer = $Timers/CollisionTimer
 
 var collided : bool = false
 var equipped_weapon : Weapon
@@ -30,19 +31,22 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	var direction : Vector2 = Input.get_vector("left", "right", "up", "down")
-	if collided:
-		collided = false
 	velocity = direction * speed
 	move_and_slide()
 	Globals.player_position = global_position
 	Globals.player_direction = direction
 
 func _on_player_collided(_position : Vector2, collision_direction : Vector2):
-	if !collided:
+	if !collided :
 		collided = true
 		speed -= 50
+		collision_timer.start()
 		reduced_speed_timer.start()
 
 
 func _on_reduced_speed_timer_timeout() -> void:
 	speed = max_speed
+
+
+func _on_collision_timer_timeout() -> void:
+	collided = false
