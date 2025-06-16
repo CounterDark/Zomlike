@@ -26,6 +26,8 @@ var collided: bool = true
 
 func _ready():
 	navigation_agent.target_position = Globals.player_position
+	health = health * Difficulty.get_stat_multiplier()
+	
 	
 func _physics_process(delta: float) -> void:
 	if can_walk:
@@ -68,7 +70,7 @@ func _on_attack_area_body_entered(_body: Node2D) -> void:
 	if can_attack:
 		attack_timer.start()
 		can_attack = false
-		var attack_damage = damage * (1.0 if randf() > crit_chance else crit_multiplier)
+		var attack_damage = (damage*Difficulty.get_stat_multiplier()) * (1.0 if randf() > crit_chance else crit_multiplier)
 		PlayerStats.health -= round(attack_damage)
 
 func _on_attack_area_body_exited(_body: Node2D) -> void:

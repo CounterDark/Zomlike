@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddc3d474xeow"]
 
-[ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://Scenes/levels/Level.tscn" id="1_m8k37"]
-[ext_resource type="PackedScene" uid="uid://dyo0ty6p06q2k" path="res://Scenes/characters/Zombie.tscn" id="2_bmctr"]
+[ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://scenes/levels/Level.tscn" id="1_m8k37"]
+[ext_resource type="PackedScene" uid="uid://dyo0ty6p06q2k" path="res://scenes/characters/Zombie.tscn" id="2_bmctr"]
 [ext_resource type="AudioStream" uid="uid://7khflrxl5g38" path="res://assets/audio/music/Graveyard.mp3" id="3_cx3j0"]
 
 [sub_resource type="Gradient" id="Gradient_m8k37"]
