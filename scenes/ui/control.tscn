@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6kym2228d601"]
+[gd_scene load_steps=6 format=3 uid="uid://c6kym2228d601"]
 
-[ext_resource type="Script" uid="uid://c14djjgdq18ib" path="res://scenes/ui/ui.gd" id="1_tl4hx"]
+[ext_resource type="Script" uid="uid://c14djjgdq18ib" path="res://Scenes/ui/ui.gd" id="1_tl4hx"]
 
-[sub_resource type="Gradient" id="Gradient_sqke0"]
-colors = PackedColorArray(0.913725, 0, 0, 1, 0.839216, 0.0627451, 0, 1)
+[sub_resource type="Gradient" id="Gradient_h7swn"]
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_tl4hx"]
-gradient = SubResource("Gradient_sqke0")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5xh3h"]
+gradient = SubResource("Gradient_h7swn")
+
+[sub_resource type="Gradient" id="Gradient_tl4hx"]
+resource_local_to_scene = true
+colors = PackedColorArray(1, 0, 0, 1, 0.752844, 0, 0.188487, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h7swn"]
+gradient = SubResource("Gradient_tl4hx")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -31,4 +37,5 @@ offset_right = -6.10352e-05
 clip_contents = true
 layout_mode = 2
 tooltip_text = "Health"
-texture_under = SubResource("GradientTexture1D_tl4hx")
+texture_under = SubResource("GradientTexture1D_5xh3h")
+texture_progress = SubResource("GradientTexture1D_h7swn")

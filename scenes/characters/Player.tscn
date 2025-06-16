@@ -8,7 +8,7 @@ size = Vector2(9, 11.8)
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(5, 5)
-collision_mask = 30
+collision_mask = 62
 script = ExtResource("1_vbm2w")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
@@ -16,6 +16,13 @@ position = Vector2(0.0999996, -0.0999994)
 scale = Vector2(0.0125174, 0.0130531)
 texture = ExtResource("2_gin2a")
 
-[node name="PlayerShaper" type="CollisionShape2D" parent="."]
+[node name="PlayerShape" type="CollisionShape2D" parent="."]
 position = Vector2(0.1, -0.0999999)
 shape = SubResource("RectangleShape2D_7wym0")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="ReducedSpeedTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[connection signal="timeout" from="Timers/ReducedSpeedTimer" to="." method="_on_reduced_speed_timer_timeout"]

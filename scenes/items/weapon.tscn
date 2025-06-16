@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://i7upl8y8xcqq"]
 
-[ext_resource type="Script" uid="uid://spkb2v06hxer" path="res://Scenes/levels/weapon.gd" id="1_vb8ur"]
+[ext_resource type="Script" uid="uid://spkb2v06hxer" path="res://scripts/items/weapon.gd" id="1_vb8ur"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vb8ur"]
 
@@ -21,4 +21,5 @@ shape = SubResource("RectangleShape2D_lr5ri")
 
 [node name="WeaponTimer" type="Timer" parent="."]
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

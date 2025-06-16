@@ -3,8 +3,11 @@ extends Node
 signal stat_change
 
 @export var max_health : int = 100
-@export var base_attack_damage : int = 20
-var attack_damage : int = base_attack_damage
+@export var base_damage : int = 20
+@export var crit_chance : float = 0.1
+@export var crit_multiplier: float = 1.5
+
+var damage : int = base_damage
 var armor : int = 10
 var player_invulnerable: bool = false
 
