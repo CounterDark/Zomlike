@@ -24,10 +24,11 @@ shape = SubResource("CapsuleShape2D_rr02n")
 [node name="Timers" type="Node" parent="."]
 
 [node name="ReducedSpeedTimer" type="Timer" parent="Timers"]
+wait_time = 0.8
 one_shot = true
 
 [node name="CollisionTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="Timers/ReducedSpeedTimer" to="." method="_on_reduced_speed_timer_timeout"]
