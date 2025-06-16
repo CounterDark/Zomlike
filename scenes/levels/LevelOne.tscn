@@ -36,6 +36,5 @@ navigation_polygon = SubResource("NavigationPolygon_j3ca7")
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." index="8"]
 stream = ExtResource("3_cx3j0")
 autoplay = true
-stream_paused = true
 max_distance = 4096.0
 parameters/looping = true

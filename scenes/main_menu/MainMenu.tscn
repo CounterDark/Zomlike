@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cj6dn602r8leu"]
+[gd_scene load_steps=7 format=3 uid="uid://bgxjmf8rkpph1"]
 
 [ext_resource type="Texture2D" uid="uid://bsp2ddhd702" path="res://assets/graphics/main_menu/background.png" id="1_isws5"]
 [ext_resource type="Script" uid="uid://c4vr4iyoy0iyh" path="res://Scenes/main_menu/main_menu.gd" id="1_trd01"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c0pwn3xabdsh2" path="res://scripts/ui/exit_button.gd" id="4_qmweu"]
 [ext_resource type="AudioStream" uid="uid://bqcunmavrwnp0" path="res://assets/audio/music/Ash.mp3" id="6_76iac"]
 
-[node name="MainMenu" type="Control"]
+[node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,7 +97,6 @@ script = ExtResource("4_qmweu")
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_76iac")
 autoplay = true
-stream_paused = true
 parameters/looping = true
 
 [connection signal="pressed" from="UI/Controls/VBoxContainer/StartButton" to="UI/Controls/VBoxContainer/StartButton" method="_on_pressed"]
