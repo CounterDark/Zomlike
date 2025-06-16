@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddc3d474xeow"]
+[gd_scene load_steps=7 format=3 uid="uid://ddc3d474xeow"]
 
 [ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://Scenes/levels/Level.tscn" id="1_m8k37"]
 [ext_resource type="PackedScene" uid="uid://dyo0ty6p06q2k" path="res://Scenes/characters/Zombie.tscn" id="2_bmctr"]
+[ext_resource type="AudioStream" uid="uid://7khflrxl5g38" path="res://assets/audio/music/Graveyard.mp3" id="3_cx3j0"]
 
 [sub_resource type="Gradient" id="Gradient_m8k37"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -16,6 +17,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-644, -379, 638, -382, 
 
 [node name="Level" instance=ExtResource("1_m8k37")]
 
+[node name="Zombie" parent="Enemies" index="0" instance=ExtResource("2_bmctr")]
+position = Vector2(103, -1)
+scale = Vector2(0.4, 0.4)
+
 [node name="Player" parent="." index="5"]
 max_speed = 400.0
 min_speed = 40.0
@@ -25,9 +30,12 @@ position = Vector2(-5.96046e-08, -4.47035e-08)
 scale = Vector2(0.0078125, 4)
 texture = SubResource("GradientTexture1D_j3ca7")
 
-[node name="Zombie" parent="." index="7" instance=ExtResource("2_bmctr")]
-position = Vector2(103, -1)
-scale = Vector2(0.4, 0.4)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." index="8"]
+[node name="NavigationRegion" type="NavigationRegion2D" parent="." index="7"]
 navigation_polygon = SubResource("NavigationPolygon_j3ca7")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." index="8"]
+stream = ExtResource("3_cx3j0")
+autoplay = true
+stream_paused = true
+max_distance = 4096.0
+parameters/looping = true

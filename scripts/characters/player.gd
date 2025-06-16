@@ -3,7 +3,7 @@ class_name Player
 
 @export var max_speed: float = 400
 @export var min_speed: float = 40
-@export var collision_speed: float = 1000
+@export var collision_speed: float = 1200
 
 const GAME_OVER_SCENE : PackedScene = preload("res://Scenes/main_menu/MainMenu.tscn")
 
@@ -30,7 +30,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if PlayerStats.health < 0 :
+	if PlayerStats.health <= 0 :
 		get_tree().change_scene_to_packed(GAME_OVER_SCENE)
 	if Input.is_action_pressed("primary action"):
 		if equipped_weapon != null:

@@ -6,9 +6,12 @@ signal stat_change
 @export var base_damage : int = 20
 @export var crit_chance : float = 0.1
 @export var crit_multiplier: float = 1.5
+@export var base_armor : int = 10
+
+const INVURNERABLE_TIME : float = 0.5
 
 var damage : int = base_damage
-var armor : int = 10
+var armor : int = base_armor
 var player_invulnerable: bool = false
 
 var health : int = 60:
@@ -28,5 +31,5 @@ var health_kit_amount : int = 5:
 		stat_change.emit()
 
 func player_invulnerable_timer():
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(INVURNERABLE_TIME).timeout
 	player_invulnerable = false

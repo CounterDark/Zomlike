@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dyo0ty6p06q2k"]
+[gd_scene load_steps=8 format=3 uid="uid://dyo0ty6p06q2k"]
 
 [ext_resource type="Script" uid="uid://e3ied182oeis" path="res://scripts/characters/zombie.gd" id="1_kf7un"]
 [ext_resource type="Texture2D" uid="uid://xg2eu8w3j5vq" path="res://assets/sprites/enemies/zombie/zombie_sprite_-3.png.png" id="1_w2vhs"]
+[ext_resource type="AudioStream" uid="uid://bbluukgwmil8v" path="res://assets/audio/zombie/zombie_hit.wav" id="3_id0gx"]
+[ext_resource type="AudioStream" uid="uid://f7sq5n85myc6" path="res://assets/audio/zombie/zombie_notice.wav" id="3_uxbb8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf7un"]
 radius = 55.0
@@ -60,6 +62,13 @@ autostart = true
 [node name="WalkTimer" type="Timer" parent="Timers"]
 wait_time = 0.4
 one_shot = true
+
+[node name="NoticePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_uxbb8")
+
+[node name="HitPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_id0gx")
+max_distance = 400.0
 
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]

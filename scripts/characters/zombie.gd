@@ -8,10 +8,15 @@ extends CharacterBody2D
 @export var crit_multiplier : float = 1.5
 @export var bounce_multiplier : float = 3.0
 @export var health: int = 30
+
 @onready var navigation_agent: NavigationAgent2D = $ZombieNavigation
+ 
 @onready var vurnerable_timer: Timer = $Timers/VurnerableTimer
 @onready var attack_timer: Timer = $Timers/AttackTimer
 @onready var walk_timer: Timer = $Timers/WalkTimer
+
+@onready var hit_player : AudioStreamPlayer2D = $HitPlayer
+@onready var notice_player : AudioStreamPlayer2D = $NoticePlayer
 
 var can_attack : bool = true
 var can_walk : bool = true
@@ -48,6 +53,7 @@ func _physics_process(delta: float) -> void:
 
 func hit(hit_damage : int):
 	if vulnerable:
+		hit_player.play()
 		health -= hit_damage
 		vulnerable = false
 		vurnerable_timer.start()
@@ -55,6 +61,7 @@ func hit(hit_damage : int):
 		queue_free()
 
 func _on_notice_area_body_entered(_body: Node2D) -> void:
+	notice_player.play()
 	enemy_nearby = true
 
 func _on_attack_area_body_entered(_body: Node2D) -> void:
