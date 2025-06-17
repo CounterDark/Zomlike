@@ -1,25 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://i7upl8y8xcqq"]
+[gd_scene load_steps=5 format=3 uid="uid://ru5c7q7np7lx"]
 
-[ext_resource type="Script" uid="uid://spkb2v06hxer" path="res://scripts/items/weapon.gd" id="1_vb8ur"]
-[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_15i5g"]
+[ext_resource type="Script" uid="uid://spkb2v06hxer" path="res://scripts/items/weapon.gd" id="1_e5nva"]
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_cfm8s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
-atlas = ExtResource("2_15i5g")
-region = Rect2(64, 20, 30, 7)
+atlas = ExtResource("2_cfm8s")
+region = Rect2(32, 86, 30, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
-size = Vector2(56, 14)
+size = Vector2(60, 20)
 
 [node name="Weapon" type="RigidBody2D"]
-script = ExtResource("1_vb8ur")
+script = ExtResource("1_e5nva")
 
 [node name="WeaponImage" type="Sprite2D" parent="."]
-position = Vector2(28, 0)
-scale = Vector2(1.867, 2)
+position = Vector2(30, 0)
+scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_q5le8")
 
 [node name="WeaponShape" type="CollisionShape2D" parent="."]
-position = Vector2(28, 0)
+position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_lr5ri")
 
 [node name="WeaponTimer" type="Timer" parent="."]
