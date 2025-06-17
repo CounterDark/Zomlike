@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bgxjmf8rkpph1"]
 
 [ext_resource type="Texture2D" uid="uid://bsp2ddhd702" path="res://assets/graphics/main_menu/background.png" id="1_isws5"]
-[ext_resource type="Script" uid="uid://c4vr4iyoy0iyh" path="res://scenes/main_menu/main_menu.gd" id="1_trd01"]
-[ext_resource type="Script" uid="uid://cq0sockm5savc" path="res://scenes/main_menu/start_button.gd" id="2_5sjui"]
+[ext_resource type="Script" uid="uid://c4vr4iyoy0iyh" path="res://Scenes/main_menu/main_menu.gd" id="1_trd01"]
+[ext_resource type="Script" uid="uid://cq0sockm5savc" path="res://Scenes/main_menu/start_button.gd" id="2_5sjui"]
 [ext_resource type="Script" uid="uid://ml87ikiivhl0" path="res://scripts/ui/main_menu_settings_button.gd" id="3_xr86y"]
 [ext_resource type="Script" uid="uid://c0pwn3xabdsh2" path="res://scripts/ui/exit_button.gd" id="4_qmweu"]
 [ext_resource type="AudioStream" uid="uid://bqcunmavrwnp0" path="res://assets/audio/music/Ash.mp3" id="6_76iac"]
@@ -60,12 +60,12 @@ clip_contents = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.462
-anchor_top = 0.455
-anchor_right = 0.535
-anchor_bottom = 0.609
-offset_top = 0.127991
-offset_right = 0.197998
-offset_bottom = -0.0720215
+anchor_top = 0.447
+anchor_right = 0.538
+anchor_bottom = 0.625
+offset_left = -0.359985
+offset_top = 0.159973
+offset_right = 0.359924
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
@@ -73,18 +73,24 @@ alignment = 1
 
 [node name="StartButton" type="Button" parent="UI/Controls/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Start game"
 language = "en"
 script = ExtResource("2_5sjui")
 
 [node name="Settings Button" type="Button" parent="UI/Controls/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Settings"
 language = "en"
 script = ExtResource("3_xr86y")
 
 [node name="Exit Button" type="Button" parent="UI/Controls/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_disabled_color = Color(1, 0.2, 0.2, 1)
 theme_override_colors/font_hover_pressed_color = Color(1, 0.4, 0.4, 1)
 theme_override_colors/font_hover_color = Color(1, 0.4, 0.4, 1)

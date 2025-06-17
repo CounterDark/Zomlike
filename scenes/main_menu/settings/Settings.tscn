@@ -69,6 +69,8 @@ alignment = 1
 
 [node name="OptionButton" type="OptionButton" parent="UI/Controls/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 selected = 1
 item_count = 3
 popup/item_0/text = "Easy"
@@ -81,6 +83,8 @@ script = ExtResource("2_xxb37")
 
 [node name="Exit Button" type="Button" parent="UI/Controls/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Back"
 language = "en"
 script = ExtResource("3_xxb37")
