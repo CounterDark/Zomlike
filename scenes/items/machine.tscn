@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dps6asgrfd23g"]
+
+[ext_resource type="Script" uid="uid://bb1obq3ddw2ww" path="res://scripts/items/machine.gd" id="1_ijxnt"]
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_rmkwv"]
+[ext_resource type="AudioStream" uid="uid://devf6ncoex2xe" path="res://assets/audio/weapons/bullet_fire.wav" id="3_hmxir"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
+atlas = ExtResource("2_rmkwv")
+region = Rect2(0, 83, 31, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
+size = Vector2(63, 26)
+
+[node name="Machine" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 24
+gravity_scale = 0.0
+script = ExtResource("1_ijxnt")
+attack_speed = 0.2
+weapon_range_damage = 12
+weapon_crit_chance = 0.2
+knockback = 20
+
+[node name="MachineImage" type="Sprite2D" parent="."]
+position = Vector2(54, 0)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_q5le8")
+
+[node name="MachineShape" type="CollisionShape2D" parent="."]
+position = Vector2(53.5, 0)
+shape = SubResource("RectangleShape2D_lr5ri")
+
+[node name="BulletMarker" type="Marker2D" parent="."]
+position = Vector2(85, -2)
+
+[node name="WeaponTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="BulletSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hmxir")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

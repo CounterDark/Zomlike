@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0p2djjppt2ic"]
+
+[ext_resource type="Script" uid="uid://c0ddvm2o50yt5" path="res://scripts/items/machete.gd" id="1_irsn3"]
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_e3xun"]
+[ext_resource type="AudioStream" uid="uid://ci0rp66hg1tf0" path="res://assets/audio/weapons/machete_swing.wav" id="3_irsn3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
+atlas = ExtResource("2_e3xun")
+region = Rect2(32, 21, 24, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
+size = Vector2(65, 19)
+
+[node name="Machete" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 24
+gravity_scale = 0.0
+can_sleep = false
+max_contacts_reported = 1
+script = ExtResource("1_irsn3")
+attack_speed = 0.5
+weapon_attack_damage = 20
+weapon_crit_chance = 0.2
+knockback = 150
+
+[node name="MacheteImage" type="Sprite2D" parent="."]
+position = Vector2(60, 0.75)
+scale = Vector2(2.75, 2.786)
+texture = SubResource("AtlasTexture_q5le8")
+
+[node name="MacheteShape" type="CollisionShape2D" parent="."]
+position = Vector2(59, 1)
+shape = SubResource("RectangleShape2D_lr5ri")
+
+[node name="MacheteHitbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="MacheteShape" type="CollisionShape2D" parent="MacheteHitbox"]
+position = Vector2(59, 1)
+shape = SubResource("RectangleShape2D_lr5ri")
+
+[node name="WeaponTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_irsn3")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="body_entered" from="MacheteHitbox" to="." method="_on_sword_hitbox_body_entered"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

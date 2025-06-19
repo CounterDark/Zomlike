@@ -24,7 +24,8 @@ var speed: float = max_speed :
 func _ready() -> void:
 	SignalBus.player_collided.connect(_on_player_collided)
 	#_equip_weapon(preload("res://Scenes/items/sword.tscn"))
-	_equip_weapon(preload("res://Scenes/items/assault_rifle.tscn"))
+	#_equip_weapon(preload("res://Scenes/items/assault_rifle.tscn"))
+	_equip_weapon(preload("res://Scenes/items/granade_launcher.tscn"))
 
 func _equip_weapon(weapon_packed_scene: Resource) -> void:
 	var weapon : Node = weapon_packed_scene.instantiate()

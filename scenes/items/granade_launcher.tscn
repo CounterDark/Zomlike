@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://x4i3ch04uha8"]
+
+[ext_resource type="Script" uid="uid://bfo1w1kxi0ft0" path="res://scripts/items/granade_launcher.gd" id="1_ca71r"]
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_r7jdn"]
+[ext_resource type="AudioStream" uid="uid://devf6ncoex2xe" path="res://assets/audio/weapons/bullet_fire.wav" id="3_61k58"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
+atlas = ExtResource("2_r7jdn")
+region = Rect2(48, 65, 34, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
+size = Vector2(68, 30)
+
+[node name="GrenadeLauncher" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 24
+gravity_scale = 0.0
+script = ExtResource("1_ca71r")
+attack_speed = 1.5
+weapon_range_damage = 150
+weapon_crit_chance = 0.05
+
+[node name="GrenadeLauncherImage" type="Sprite2D" parent="."]
+position = Vector2(58, 0)
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_q5le8")
+
+[node name="GrenadeLauncherShape" type="CollisionShape2D" parent="."]
+position = Vector2(58, 0)
+shape = SubResource("RectangleShape2D_lr5ri")
+
+[node name="GrenadeMarker" type="Marker2D" parent="."]
+position = Vector2(76, -2)
+
+[node name="WeaponTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="GrenadeLaunchSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_61k58")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://0801sj87qdg8"]
+
+[ext_resource type="Script" uid="uid://ddcwyjqq6ufsl" path="res://scripts/characters/zombie_boss.gd" id="1_1gybc"]
+[ext_resource type="AudioStream" uid="uid://f7sq5n85myc6" path="res://assets/audio/enemies/zombie_notice.wav" id="3_221r3"]
+[ext_resource type="AudioStream" uid="uid://bbluukgwmil8v" path="res://assets/audio/enemies/zombie_hit.wav" id="4_xlcyf"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ftfv"]
+load_path = "res://.godot/imported/zombie_boss.png-d2693778a2612fa96b721e2095daa53d.ctex"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf7un"]
+radius = 167.0
+height = 427.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_id0gx"]
+radius = 712.404
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxbb8"]
+radius = 213.009
+
+[node name="ZombieBoss" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 8
+collision_mask = 95
+collision_priority = 2.0
+script = ExtResource("1_1gybc")
+
+[node name="ZombieBossSprite" type="Sprite2D" parent="."]
+position = Vector2(-6, 6)
+texture = SubResource("CompressedTexture2D_2ftfv")
+
+[node name="ZombieBossShape" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 40)
+shape = SubResource("CapsuleShape2D_kf7un")
+
+[node name="NoticeArea" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="NoticeShape" type="CollisionShape2D" parent="NoticeArea"]
+position = Vector2(-4, 6)
+shape = SubResource("CircleShape2D_id0gx")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="AttackShape" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-8, 31)
+shape = SubResource("CircleShape2D_uxbb8")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="VurnerableTimer" type="Timer" parent="Timers"]
+process_callback = 0
+wait_time = 0.1
+one_shot = true
+
+[node name="WalkTimer" type="Timer" parent="Timers"]
+wait_time = 0.4
+one_shot = true
+
+[node name="NoticePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_221r3")
+
+[node name="HitPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_xlcyf")
+max_distance = 400.0
+
+[connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
+[connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="Timers/VurnerableTimer" to="." method="_on_vurnerable_timer_timeout"]
+[connection signal="timeout" from="Timers/WalkTimer" to="." method="_on_walk_timer_timeout"]

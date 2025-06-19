@@ -11,10 +11,12 @@ class_name Level
 @onready var equipment_scene : Control = $Equipment
 
 var bullet_scene: PackedScene = preload(\"res://Scenes/projectiles/Bullet.tscn\")
+var grenade_scene: PackedScene = preload(\"res://Scenes/projectiles/Grenade.tscn\")
 
 func _ready() -> void:
 	equipment_scene.hide()
 	SignalBus.connect(\"shot_bullet\", _on_shot_bullet)
+	SignalBus.connect(\"shot_grenade\", _on_shot_grenade)
 	if PlayerStats.time_start == 0:
 		PlayerStats.time_start = Time.get_unix_time_from_system()
 
@@ -29,6 +31,9 @@ func pause() -> void :
 
 func _on_shot_bullet(bullet_position : Vector2, direction : Vector2, knockback : int) -> void :
 	create_bullet(bullet_position, direction, knockback)
+	
+func _on_shot_grenade(bullet_position : Vector2, direction : Vector2) -> void :
+	create_grenade(bullet_position, direction)
 
 func create_bullet(bullet_position : Vector2, direction : Vector2, knockback : int)  -> void :
 	var bullet = bullet_scene.instantiate() as Bullet
@@ -37,6 +42,13 @@ func create_bullet(bullet_position : Vector2, direction : Vector2, knockback : i
 	bullet.rotation = Globals.player_direction.angle() + Vector2.DOWN.angle()
 	bullet.knockback = knockback
 	$Projectiles.add_child(bullet)
+	
+func create_grenade(granade_position : Vector2, direction : Vector2)  -> void :
+	var grenade = grenade_scene.instantiate() as RigidBody2D
+	grenade.position = granade_position
+	grenade.linear_velocity = direction * grenade.speed
+	grenade.rotation = Globals.player_direction.angle() + Vector2.RIGHT.angle()
+	$Projectiles.add_child(grenade)
 "
 
 [node name="Level" type="Node2D"]
