@@ -56,6 +56,12 @@ autoplay = true
 max_distance = 4096.0
 parameters/looping = true
 
+[node name="Equipment" parent="." index="12"]
+offset_left = -305.0
+offset_top = -264.0
+offset_right = 329.0
+offset_bottom = 265.0
+
 [node name="LabelsRoot" type="CanvasGroup" parent="." index="13"]
 
 [node name="Label" type="Label" parent="LabelsRoot" index="0"]
