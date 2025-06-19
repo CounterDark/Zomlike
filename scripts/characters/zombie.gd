@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 @export var default_speed: int = 300
-@export var speed: int = 300
 @export var finding_speed: int = 300
 @export var damage : int = 10
 @export var crit_chance : float = 0.05
@@ -18,13 +17,17 @@ extends CharacterBody2D
 @onready var hit_player : AudioStreamPlayer2D = $HitPlayer
 @onready var notice_player : AudioStreamPlayer2D = $NoticePlayer
 
+@onready var sprite : Sprite2D = $ZombieSprite
+
 var can_attack : bool = true
 var can_walk : bool = true
 var enemy_nearby : bool = false
 var vulnerable: bool = true
 var collided: bool = true
+var hit_animation_time : float = 0.15
+var speed: int = default_speed
 
-func _ready():
+func _ready() -> void:
 	navigation_agent.target_position = Globals.player_position
 	_change_stats()
 	Difficulty.difficulty_change.connect(_on_difficulty_change)
@@ -53,15 +56,24 @@ func _physics_process(delta: float) -> void:
 				walk_timer.start()
 				can_walk = false
 
-func hit(hit_damage : int):
+func hit(hit_damage : int, hit_direction: Vector2, knockback: int) -> void:
 	if vulnerable:
+		var new_position : Vector2 = position + hit_direction * knockback
+		var current_position : Vector2 = position
+		var tween = create_tween().bind_node(self)
+		tween.tween_property(self, "position", new_position, hit_animation_time).from_current()
+		tween.tween_property(self, "position", current_position, hit_animation_time).from(new_position)
+		tween.play()
 		hit_player.play()
 		health -= hit_damage
 		vulnerable = false
 		vurnerable_timer.start()
+		
 	if health <= 0:
-		queue_free()
-
+		var tween = get_tree().create_tween()
+		tween.tween_property(sprite, "modulate", Color.RED, 0.25)
+		tween.tween_callback(self.queue_free)
+		
 func _on_notice_area_body_entered(_body: Node2D) -> void:
 	notice_player.play()
 	enemy_nearby = true

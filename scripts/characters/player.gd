@@ -22,20 +22,33 @@ var speed: float = max_speed :
 		
 
 func _ready() -> void:
-	PlayerStats.health = 100
 	SignalBus.player_collided.connect(_on_player_collided)
+	#_equip_weapon(preload("res://Scenes/items/sword.tscn"))
+	_equip_weapon(preload("res://Scenes/items/assault_rifle.tscn"))
+
+func _equip_weapon(weapon_packed_scene: Resource) -> void:
+	var weapon : Node = weapon_packed_scene.instantiate()
+	if weapon is Weapon:
+		equipped_weapon = weapon
+		self.add_child(weapon)
+	
+func _unequip_weapon() -> void:
+	if equipped_weapon != null:
+		equipped_weapon.queue_free()
+		equipped_weapon = null
 
 func _process(_delta: float) -> void:
+	if equipped_weapon != null:
+		if Input.is_action_pressed("primary action"):
+			equipped_weapon.attack()
 	if PlayerStats.health <= 0 :
 		get_tree().change_scene_to_file("res://Scenes/main_menu/MainMenu.tscn")
-	if Input.is_action_pressed("primary action"):
-		if equipped_weapon != null:
-			equipped_weapon.attack()
+
 
 func _physics_process(_delta: float) -> void:
 	if collided:
 		collided = false
-	else:	
+	else:
 		var direction : Vector2 = Input.get_vector("left", "right", "up", "down")
 		velocity = direction * speed
 		Globals.player_direction = direction

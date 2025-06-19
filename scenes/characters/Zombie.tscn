@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://e3ied182oeis" path="res://scripts/characters/zombie.gd" id="1_kf7un"]
 [ext_resource type="Texture2D" uid="uid://xg2eu8w3j5vq" path="res://assets/sprites/enemies/zombie/zombie_sprite_-3.png.png" id="1_w2vhs"]
-[ext_resource type="AudioStream" uid="uid://bbluukgwmil8v" path="res://assets/audio/zombie/zombie_hit.wav" id="3_id0gx"]
-[ext_resource type="AudioStream" uid="uid://f7sq5n85myc6" path="res://assets/audio/zombie/zombie_notice.wav" id="3_uxbb8"]
+[ext_resource type="AudioStream" uid="uid://bbluukgwmil8v" path="res://assets/audio/enemies/zombie_hit.wav" id="3_id0gx"]
+[ext_resource type="AudioStream" uid="uid://f7sq5n85myc6" path="res://assets/audio/enemies/zombie_notice.wav" id="3_uxbb8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf7un"]
 radius = 55.0
@@ -13,11 +13,12 @@ height = 167.0
 radius = 480.176
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxbb8"]
-radius = 103.175
+radius = 89.2749
 
 [node name="Zombie" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
-collision_mask = 23
+collision_mask = 95
+collision_priority = 2.0
 script = ExtResource("1_kf7un")
 
 [node name="ZombieSprite" type="Sprite2D" parent="."]
@@ -53,7 +54,8 @@ time_horizon_agents = 0.5
 one_shot = true
 
 [node name="VurnerableTimer" type="Timer" parent="Timers"]
-wait_time = 0.2
+process_callback = 0
+wait_time = 0.1
 one_shot = true
 
 [node name="NavigationTimer" type="Timer" parent="Timers"]

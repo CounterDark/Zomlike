@@ -28,12 +28,8 @@ tile_map_data = PackedByteArray("AADs//T/AQAAAAEAAADt//T/AQAAAAAAAADu//T/AQAAAAA
 tile_set = ExtResource("3_no7sk")
 
 [node name="Zombie" parent="Enemies" index="0" instance=ExtResource("2_bmctr")]
-position = Vector2(103, -1)
+position = Vector2(268, 13)
 scale = Vector2(0.4, 0.4)
-
-[node name="Player" parent="." index="6"]
-max_speed = 400.0
-min_speed = 40.0
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" index="3"]
 position = Vector2(-5.96046e-08, -4.47035e-08)
@@ -41,6 +37,7 @@ scale = Vector2(0.0078125, 4)
 texture = SubResource("GradientTexture1D_j3ca7")
 
 [node name="NavigationRegion" type="NavigationRegion2D" parent="." index="8"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_j3ca7")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." index="9"]

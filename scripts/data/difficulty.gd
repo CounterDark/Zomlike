@@ -4,7 +4,7 @@ signal difficulty_change
 
 var game_difficulty: int = 1
 
-func get_stat_multiplier():
+func get_stat_multiplier() -> float:
 	if (game_difficulty == 0):
 		return 0.5;
 	elif (game_difficulty == 1):

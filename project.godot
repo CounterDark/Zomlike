@@ -73,6 +73,7 @@ down={
 2d_physics/layer_4="Entities"
 2d_physics/layer_5="Map"
 2d_physics/layer_6="Zones"
+2d_physics/layer_7="Weapons"
 
 [physics]
 

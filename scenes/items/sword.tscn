@@ -1,28 +1,55 @@
-[gd_scene load_steps=5 format=3 uid="uid://co0316isth5qx"]
+[gd_scene load_steps=6 format=3 uid="uid://co0316isth5qx"]
 
-[ext_resource type="Script" uid="uid://spkb2v06hxer" path="res://scripts/items/weapon.gd" id="1_i5ed0"]
+[ext_resource type="Script" uid="uid://cymsseybynxj2" path="res://scripts/items/sword.gd" id="1_drld8"]
 [ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_l3uod"]
+[ext_resource type="AudioStream" uid="uid://dxpixlqhgay30" path="res://assets/audio/weapons/sword_swing.wav" id="3_kp4iw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
 atlas = ExtResource("2_l3uod")
 region = Rect2(64, 20, 30, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
-size = Vector2(56, 14)
+size = Vector2(60.5, 14)
 
-[node name="Weapon" type="RigidBody2D"]
-script = ExtResource("1_i5ed0")
+[node name="Sword" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 24
+gravity_scale = 0.0
+can_sleep = false
+max_contacts_reported = 1
+script = ExtResource("1_drld8")
+attack_speed = 0.4
+weapon_attack_damage = 10
+weapon_crit_chance = 0.1
+knockback = 100
 
-[node name="WeaponImage" type="Sprite2D" parent="."]
-position = Vector2(28, 0)
-scale = Vector2(1.867, 2)
+[node name="SwordImage" type="Sprite2D" parent="."]
+position = Vector2(50, 0)
+scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_q5le8")
 
-[node name="WeaponShape" type="CollisionShape2D" parent="."]
-position = Vector2(28, 0)
+[node name="SwordShape" type="CollisionShape2D" parent="."]
+position = Vector2(49.75, 0)
+shape = SubResource("RectangleShape2D_lr5ri")
+
+[node name="SwordHitbox" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 8
+
+[node name="SwordShape" type="CollisionShape2D" parent="SwordHitbox"]
+position = Vector2(50, 0)
 shape = SubResource("RectangleShape2D_lr5ri")
 
 [node name="WeaponTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kp4iw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
+[connection signal="body_entered" from="SwordHitbox" to="." method="_on_sword_hitbox_body_entered"]
 [connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

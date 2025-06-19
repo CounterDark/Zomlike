@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://db1k2t5tirlb4"]
+
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="1_b7gv8"]
+[ext_resource type="Script" uid="uid://crmfyhh583yrp" path="res://scripts/projectiles/bullet.gd" id="1_v471m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7beao"]
+atlas = ExtResource("1_b7gv8")
+region = Rect2(177, 1, 5, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7gv8"]
+size = Vector2(4, 6)
+
+[node name="Bullet" type="Area2D"]
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 26
+script = ExtResource("1_v471m")
+
+[node name="BulletSprite" type="Sprite2D" parent="."]
+position = Vector2(-3.49691e-07, -8)
+texture = SubResource("AtlasTexture_7beao")
+
+[node name="BulletShape" type="CollisionShape2D" parent="."]
+position = Vector2(-3.49691e-07, -8)
+shape = SubResource("RectangleShape2D_b7gv8")
+
+[node name="DestructTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DestructTimer" to="." method="_on_destruct_timer_timeout"]
