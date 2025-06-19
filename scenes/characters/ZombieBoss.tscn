@@ -1,21 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://0801sj87qdg8"]
+[gd_scene load_steps=10 format=3 uid="uid://0801sj87qdg8"]
 
 [ext_resource type="Script" uid="uid://ddcwyjqq6ufsl" path="res://scripts/characters/zombie_boss.gd" id="1_1gybc"]
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_1gybc"]
 [ext_resource type="AudioStream" uid="uid://f7sq5n85myc6" path="res://assets/audio/enemies/zombie_notice.wav" id="3_221r3"]
 [ext_resource type="AudioStream" uid="uid://bbluukgwmil8v" path="res://assets/audio/enemies/zombie_hit.wav" id="4_xlcyf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ftfv"]
 load_path = "res://.godot/imported/zombie_boss.png-d2693778a2612fa96b721e2095daa53d.ctex"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6v43l"]
+atlas = ExtResource("2_1gybc")
+region = Rect2(0, 68, 38, 13)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf7un"]
-radius = 167.0
-height = 427.0
+radius = 83.0
+height = 210.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_id0gx"]
-radius = 712.404
+radius = 410.148
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxbb8"]
-radius = 213.009
+radius = 104.173
 
 [node name="ZombieBoss" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
@@ -24,11 +29,17 @@ collision_priority = 2.0
 script = ExtResource("1_1gybc")
 
 [node name="ZombieBossSprite" type="Sprite2D" parent="."]
-position = Vector2(-6, 6)
+position = Vector2(0, 1)
+scale = Vector2(0.494141, 0.494141)
 texture = SubResource("CompressedTexture2D_2ftfv")
 
+[node name="ZombieWeapon" type="Sprite2D" parent="."]
+position = Vector2(60, 0)
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_6v43l")
+
 [node name="ZombieBossShape" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 40)
+position = Vector2(0, 20)
 shape = SubResource("CapsuleShape2D_kf7un")
 
 [node name="NoticeArea" type="Area2D" parent="."]
@@ -42,7 +53,7 @@ shape = SubResource("CircleShape2D_id0gx")
 collision_layer = 32
 
 [node name="AttackShape" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(-8, 31)
+position = Vector2(1, 18)
 shape = SubResource("CircleShape2D_uxbb8")
 
 [node name="Timers" type="Node" parent="."]
