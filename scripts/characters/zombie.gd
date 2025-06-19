@@ -24,6 +24,8 @@ var can_walk : bool = true
 var enemy_nearby : bool = false
 var vulnerable: bool = true
 var collided: bool = true
+var killed: bool = false
+
 var hit_animation_time : float = 0.15
 var speed: int = default_speed
 
@@ -69,10 +71,13 @@ func hit(hit_damage : int, hit_direction: Vector2, knockback: int) -> void:
 		vulnerable = false
 		vurnerable_timer.start()
 		
-	if health <= 0:
+	if health <= 0 and !killed:
+		killed = true
 		var tween = get_tree().create_tween()
 		tween.tween_property(sprite, "modulate", Color.RED, 0.25)
 		tween.tween_callback(self.queue_free)
+		PlayerStats.kill_count += 1
+
 		
 func _on_notice_area_body_entered(_body: Node2D) -> void:
 	notice_player.play()

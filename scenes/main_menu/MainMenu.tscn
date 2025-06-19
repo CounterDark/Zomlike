@@ -2,12 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://bsp2ddhd702" path="res://assets/graphics/main_menu/background.png" id="1_isws5"]
 [ext_resource type="Script" uid="uid://c4vr4iyoy0iyh" path="res://scripts/ui/main_menu.gd" id="1_trd01"]
-[ext_resource type="Script" uid="uid://dvhgsodqvkns4" path="res://scripts/ui/start_button.gd" id="2_5sjui"]
+[ext_resource type="Script" uid="uid://cq0sockm5savc" path="res://scripts/ui/start_button.gd" id="2_5sjui"]
 [ext_resource type="Script" uid="uid://ml87ikiivhl0" path="res://scripts/ui/main_menu_settings_button.gd" id="3_xr86y"]
 [ext_resource type="Script" uid="uid://c0pwn3xabdsh2" path="res://scripts/ui/exit_button.gd" id="4_qmweu"]
 [ext_resource type="AudioStream" uid="uid://bqcunmavrwnp0" path="res://assets/audio/music/Ash.mp3" id="6_76iac"]
 
 [node name="Main" type="Control"]
+process_mode = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

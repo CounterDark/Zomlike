@@ -1,16 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://byv6ixi6qg4m"]
+[gd_scene load_steps=5 format=3 uid="uid://byv6ixi6qg4m"]
 
 [ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://Scenes/characters/Player.tscn" id="1_xlmfg"]
 [ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://Scenes/ui/control.tscn" id="2_04ab5"]
+[ext_resource type="PackedScene" uid="uid://b278vlidv8gp2" path="res://Scenes/ui/equipment.tscn" id="3_04ab5"]
 
 [sub_resource type="GDScript" id="GDScript_7c221"]
 script/source = "extends Node2D
 class_name Level
 
+@onready var equipment_scene : Control = $Equipment
+
 var bullet_scene: PackedScene = preload(\"res://Scenes/projectiles/Bullet.tscn\")
 
-func _ready():
+func _ready() -> void:
+	equipment_scene.hide()
 	SignalBus.connect(\"shot_bullet\", _on_shot_bullet)
+	if PlayerStats.time_start == 0:
+		PlayerStats.time_start = Time.get_unix_time_from_system()
+
+func _process(_delta: float) -> void:
+	PlayerStats.time_played = Time.get_unix_time_from_system() - PlayerStats.time_start
+	if Input.is_action_just_pressed(\"pause\"):
+		pause()
+
+func pause() -> void :
+	equipment_scene.show()
+	get_tree().set_deferred(\"paused\", true)
 
 func _on_shot_bullet(bullet_position : Vector2, direction : Vector2, knockback : int) -> void :
 	create_bullet(bullet_position, direction, knockback)
@@ -18,13 +33,14 @@ func _on_shot_bullet(bullet_position : Vector2, direction : Vector2, knockback :
 func create_bullet(bullet_position : Vector2, direction : Vector2, knockback : int)  -> void :
 	var bullet = bullet_scene.instantiate() as Bullet
 	bullet.position = bullet_position
-	bullet.rotation_degrees = rad_to_deg(direction.angle())
 	bullet.direction = direction
+	bullet.rotation = Globals.player_direction.angle() + Vector2.DOWN.angle()
 	bullet.knockback = knockback
 	$Projectiles.add_child(bullet)
 "
 
 [node name="Level" type="Node2D"]
+process_mode = 1
 script = SubResource("GDScript_7c221")
 
 [node name="Items" type="Node2D" parent="."]
@@ -42,6 +58,8 @@ script = SubResource("GDScript_7c221")
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 
 [node name="Control" parent="." instance=ExtResource("2_04ab5")]
+
+[node name="Equipment" parent="." instance=ExtResource("3_04ab5")]
 
 [connection signal="draw" from="." to="." method="_on_draw"]
 [connection signal="ready" from="." to="." method="_on_ready"]

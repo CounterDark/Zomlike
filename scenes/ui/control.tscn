@@ -29,15 +29,21 @@ script = ExtResource("1_tl4hx")
 
 [node name="Container" type="HBoxContainer" parent="UI"]
 anchors_preset = -1
-anchor_left = 0.352
-anchor_top = 0.841
-anchor_right = 0.7
-anchor_bottom = 0.906
-offset_right = -6.10352e-05
+anchor_left = 0.356
+anchor_top = 0.856
+anchor_right = 0.704
+anchor_bottom = 0.921
+offset_left = 0.320007
+offset_top = -0.320068
+offset_right = 0.319885
+offset_bottom = -0.320068
+alignment = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="UI/Container"]
 clip_contents = true
 layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
 tooltip_text = "Health"
 texture_under = SubResource("GradientTexture1D_5xh3h")
 texture_progress = SubResource("GradientTexture1D_h7swn")

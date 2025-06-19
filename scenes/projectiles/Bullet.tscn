@@ -11,7 +11,6 @@ region = Rect2(177, 1, 5, 8)
 size = Vector2(4, 6)
 
 [node name="Bullet" type="Area2D"]
-rotation = 1.5708
 collision_layer = 4
 collision_mask = 26
 script = ExtResource("1_v471m")

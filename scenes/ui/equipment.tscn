@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://b278vlidv8gp2"]
+
+[ext_resource type="Script" uid="uid://dgugdrpbld7wm" path="res://scripts/ui/equipment.gd" id="1_r2f54"]
+
+[node name="Equipment" type="Control"]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r2f54")
+
+[node name="EquipmentLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Stats" type="GridContainer" parent="EquipmentLayer"]
+visible = false
+clip_contents = true
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.1
+columns = 2
+
+[node name="Time" type="Label" parent="EquipmentLayer/Stats"]
+clip_contents = true
+layout_mode = 2
+
+[node name="KillCount" type="Label" parent="EquipmentLayer/Stats"]
+clip_contents = true
+layout_mode = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

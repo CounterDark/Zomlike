@@ -11,8 +11,8 @@ var knockback : int = 0
 var direction: Vector2 = Vector2.RIGHT
 
 func get_direction() -> Vector2:
-		var rotation_radians = deg_to_rad(rotation_degrees)
-		return Vector2.RIGHT.rotated(rotation_radians)
+	var rotation_radians = deg_to_rad(rotation_degrees)
+	return Vector2.RIGHT.rotated(rotation_radians)
 
 func _ready() -> void:
 	destruct_timer.start()

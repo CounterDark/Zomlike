@@ -8,9 +8,15 @@ signal stat_change
 @export var crit_multiplier: float = 1.5
 @export var base_armor : int = 10
 
-const INVURNERABLE_TIME : float = 0.5
+const INVURNERABLE_TIME : float = 0.4
 
 var player_invulnerable: bool = false
+
+var time_start : float = 0
+
+var time_played : float = 0
+
+var kill_count : int = 0
 
 var damage : int = base_damage:
 	set(value):
