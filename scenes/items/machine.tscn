@@ -16,6 +16,7 @@ collision_layer = 64
 collision_mask = 24
 gravity_scale = 0.0
 script = ExtResource("1_ijxnt")
+item_id = "machine"
 attack_speed = 0.2
 weapon_range_damage = 12
 weapon_crit_chance = 0.2

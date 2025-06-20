@@ -16,6 +16,7 @@ collision_layer = 64
 collision_mask = 24
 gravity_scale = 0.0
 script = ExtResource("1_ca71r")
+item_id = "launcher"
 attack_speed = 1.5
 weapon_range_damage = 150
 weapon_crit_chance = 0.05

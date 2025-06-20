@@ -1,12 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ru5c7q7np7lx"]
+[gd_scene load_steps=5 format=3 uid="uid://ru5c7q7np7lx"]
 
 [ext_resource type="Script" uid="uid://cpt6unv4k37kb" path="res://scripts/items/assault_rifle.gd" id="1_2rwoh"]
-[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_cfm8s"]
+[ext_resource type="Texture2D" uid="uid://wadr1o8v0g5y" path="res://resources/items/rifle_texture.tres" id="2_5u17h"]
 [ext_resource type="AudioStream" uid="uid://devf6ncoex2xe" path="res://assets/audio/weapons/bullet_fire.wav" id="3_sol4t"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
-atlas = ExtResource("2_cfm8s")
-region = Rect2(32, 86, 30, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr5ri"]
 size = Vector2(60, 20)
@@ -16,6 +12,7 @@ collision_layer = 64
 collision_mask = 24
 gravity_scale = 0.0
 script = ExtResource("1_2rwoh")
+item_id = "rifle"
 attack_speed = 0.1
 weapon_range_damage = 5
 weapon_crit_chance = 0.05
@@ -24,7 +21,7 @@ knockback = 10
 [node name="RifleImage" type="Sprite2D" parent="."]
 position = Vector2(54, 0)
 scale = Vector2(2, 2)
-texture = SubResource("AtlasTexture_q5le8")
+texture = ExtResource("2_5u17h")
 
 [node name="RifleShape" type="CollisionShape2D" parent="."]
 position = Vector2(54, 0)

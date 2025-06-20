@@ -1,6 +1,8 @@
 extends RigidBody2D
 class_name Weapon
 
+@export var item_id : String
+
 @export var attack_speed : float
 @export var weapon_attack_damage : int
 @export var weapon_range_damage : int

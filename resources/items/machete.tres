@@ -1,0 +1,10 @@
+[gd_resource type="AtlasTexture" load_steps=3 format=3 uid="uid://dycl5eq4msijg"]
+
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="1_unff3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5le8"]
+atlas = ExtResource("1_unff3")
+region = Rect2(32, 21, 24, 7)
+
+[resource]
+atlas = SubResource("AtlasTexture_q5le8")

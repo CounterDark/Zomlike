@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://c57r8lhuyoy2s"]
+[gd_scene load_steps=4 format=3 uid="uid://c57r8lhuyoy2s"]
 
 [ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="1_j8uey"]
+[ext_resource type="Script" uid="uid://ywd7sgo3mdqh" path="res://scripts/ui/inventory_item.gd" id="1_wn7k0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wn7k0"]
 atlas = ExtResource("1_j8uey")
@@ -11,6 +12,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 48.0
 offset_bottom = 48.0
+script = ExtResource("1_wn7k0")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1

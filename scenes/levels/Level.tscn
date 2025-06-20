@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://byv6ixi6qg4m"]
 
-[ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://Scenes/characters/Player.tscn" id="1_xlmfg"]
-[ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://Scenes/ui/control.tscn" id="2_04ab5"]
-[ext_resource type="PackedScene" uid="uid://cg1qd6jv58grv" path="res://Scenes/ui/equipment.tscn" id="3_04ab5"]
+[ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://scenes/characters/Player.tscn" id="1_xlmfg"]
+[ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://scenes/ui/control.tscn" id="2_04ab5"]
+[ext_resource type="PackedScene" uid="uid://cg1qd6jv58grv" path="res://scenes/ui/equipment.tscn" id="3_04ab5"]
 
 [sub_resource type="GDScript" id="GDScript_7c221"]
 script/source = "extends Node2D
@@ -19,6 +19,9 @@ func _ready() -> void:
 	SignalBus.connect(\"shot_grenade\", _on_shot_grenade)
 	if PlayerStats.time_start == 0:
 		PlayerStats.time_start = Time.get_unix_time_from_system()
+	if len(PlayerInventory.items_ids) == 0:
+		PlayerInventory.add_item('rifle')
+		PlayerInventory.equip_item(0)
 
 func _process(_delta: float) -> void:
 	PlayerStats.time_played = Time.get_unix_time_from_system() - PlayerStats.time_start
