@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c1yr4s4fbswp8" path="res://scripts/ui/inventory_cell.gd" id="1_6mumw"]
 [ext_resource type="Texture2D" uid="uid://bwnvkqwddgc6e" path="res://assets/sprites/ui/equipment/slot.png" id="1_oesa2"]
-[ext_resource type="PackedScene" uid="uid://c57r8lhuyoy2s" path="res://scenes/ui/inventory/InventoryItem.tscn" id="2_6bqms"]
+[ext_resource type="PackedScene" uid="uid://c57r8lhuyoy2s" path="res://Scenes/ui/inventory/InventoryItem.tscn" id="2_6bqms"]
 
 [node name="InventoryCell" type="Control" node_paths=PackedStringArray("item")]
 layout_mode = 3

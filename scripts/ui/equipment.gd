@@ -23,6 +23,7 @@ func _on_visibility_changed() -> void:
 		stats.show()
 		grid_container.show()
 		equipment_layer.show()
+		queue_redraw()
 	else:
 		stats.hide()
 		grid_container.hide()
