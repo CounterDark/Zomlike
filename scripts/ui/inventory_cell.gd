@@ -1,12 +1,17 @@
 extends Control
+class_name InventoryCell
+ 
+@export var item: InventoryItem
+var stored
 
-var InventoryItemNode = preload('res://scenes/ui/inventory/InventoryItem.tscn')
-var stored: Node = null
+func _ready() -> void:
+	item.visible = false
 
 func set_item_by_id(id: String):
-	if stored:
-		stored.queue_free()
-	var item: InventoryItem = InventoryItemNode.instantiate()
 	item.set_item_by_id(id)
-	stored = item
-	add_child(item)
+	stored = id
+	item.visible = true
+
+func remove_item():
+	stored = null
+	item.visible = false

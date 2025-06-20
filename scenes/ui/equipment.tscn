@@ -46,6 +46,5 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 6
 script = ExtResource("2_lh7a7")
-rows = 8
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]

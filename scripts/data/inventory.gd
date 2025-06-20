@@ -27,3 +27,9 @@ func get_equiped_id():
 	if equiped_index < 0:
 		return null
 	return items_ids[equiped_index]
+
+func get_at_index(index: int):
+	if index < len(items_ids):
+		return items_ids[index]
+	else:
+		return null

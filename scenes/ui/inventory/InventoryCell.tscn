@@ -36,4 +36,5 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="InventoryItem" parent="ItemHolder" instance=ExtResource("2_6bqms")]
+visible = false
 layout_mode = 2

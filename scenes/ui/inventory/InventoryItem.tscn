@@ -7,12 +7,14 @@
 atlas = ExtResource("1_j8uey")
 region = Rect2(32, 22, 23, 6)
 
-[node name="InventoryItem" type="Control"]
+[node name="InventoryItem" type="Control" node_paths=PackedStringArray("texture_rect", "equip_glow")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 48.0
 offset_bottom = 48.0
 script = ExtResource("1_wn7k0")
+texture_rect = NodePath("TextureRect")
+equip_glow = NodePath("ColorRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -30,3 +32,13 @@ grow_vertical = 2
 texture = SubResource("AtlasTexture_wn7k0")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.309804, 1, 1, 0.188235)
