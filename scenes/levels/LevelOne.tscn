@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://ddc3d474xeow"]
 
-[ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://Scenes/levels/Level.tscn" id="1_m8k37"]
+[ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://scenes/levels/Level.tscn" id="1_m8k37"]
 [ext_resource type="TileSet" uid="uid://bbtu8j6y5thxo" path="res://assets/tilemaps/floor.tres" id="2_b0via"]
-[ext_resource type="PackedScene" uid="uid://dyo0ty6p06q2k" path="res://Scenes/characters/Zombie.tscn" id="2_bmctr"]
+[ext_resource type="PackedScene" uid="uid://dyo0ty6p06q2k" path="res://scenes/characters/Zombie.tscn" id="2_bmctr"]
 [ext_resource type="AudioStream" uid="uid://7khflrxl5g38" path="res://assets/audio/music/Graveyard.mp3" id="3_cx3j0"]
 [ext_resource type="TileSet" uid="uid://qktxrevgpxev" path="res://assets/tilemaps/walls.tres" id="3_no7sk"]
 [ext_resource type="PackedScene" uid="uid://0801sj87qdg8" path="res://Scenes/characters/ZombieBoss.tscn" id="5_no7sk"]

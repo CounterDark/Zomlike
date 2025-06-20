@@ -26,6 +26,9 @@ func _ready() -> void:
 	SignalBus.connect(\"shot_grenade\", _on_shot_grenade)
 	if PlayerStats.time_start == 0:
 		PlayerStats.time_start = Time.get_unix_time_from_system()
+	if len(PlayerInventory.items_ids) == 0:
+		PlayerInventory.add_item('rifle')
+		PlayerInventory.equip_item(0)
 
 func _process(_delta: float) -> void:
 	PlayerStats.time_played = Time.get_unix_time_from_system() - PlayerStats.time_start

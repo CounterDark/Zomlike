@@ -21,6 +21,8 @@ Globals="*res://scripts/data/globals.gd"
 PlayerStats="*res://scripts/data/player_stats.gd"
 Difficulty="*res://scripts/data/difficulty.gd"
 SignalBus="*res://scripts/data/signal_bus.gd"
+ItemsDatalist="*res://scripts/data/items_datalist.gd"
+PlayerInventory="*res://scripts/data/inventory.gd"
 
 [display]
 

@@ -18,6 +18,7 @@ gravity_scale = 0.0
 can_sleep = false
 max_contacts_reported = 1
 script = ExtResource("1_drld8")
+item_id = "sword"
 attack_speed = 0.4
 weapon_attack_damage = 10
 weapon_crit_chance = 0.1
