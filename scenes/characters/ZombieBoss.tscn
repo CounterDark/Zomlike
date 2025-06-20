@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://0801sj87qdg8"]
+[gd_scene load_steps=14 format=3 uid="uid://0801sj87qdg8"]
 
 [ext_resource type="Script" uid="uid://ddcwyjqq6ufsl" path="res://scripts/characters/zombie_boss.gd" id="1_1gybc"]
 [ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_1gybc"]
 [ext_resource type="AudioStream" uid="uid://f7sq5n85myc6" path="res://assets/audio/enemies/zombie_notice.wav" id="3_221r3"]
 [ext_resource type="AudioStream" uid="uid://bbluukgwmil8v" path="res://assets/audio/enemies/zombie_hit.wav" id="4_xlcyf"]
+[ext_resource type="AudioStream" uid="uid://di7at4h8ee1vf" path="res://assets/audio/enemies/stomp.wav" id="5_6v43l"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2ftfv"]
 load_path = "res://.godot/imported/zombie_boss.png-d2693778a2612fa96b721e2095daa53d.ctex"
@@ -20,7 +21,72 @@ height = 210.0
 radius = 410.148
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxbb8"]
-radius = 104.173
+radius = 104.019
+
+[sub_resource type="Animation" id="Animation_221r3"]
+resource_name = "Stomp"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StompPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_6v43l")
+}],
+"times": PackedFloat32Array(0.233333)
+}
+tracks/1/use_blend = true
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stomp"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_6v43l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xlcyf"]
+_data = {
+&"RESET": SubResource("Animation_6v43l"),
+&"Stomp": SubResource("Animation_221r3")
+}
 
 [node name="ZombieBoss" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
@@ -34,9 +100,18 @@ scale = Vector2(0.494141, 0.494141)
 texture = SubResource("CompressedTexture2D_2ftfv")
 
 [node name="ZombieWeapon" type="Sprite2D" parent="."]
-position = Vector2(60, 0)
+position = Vector2(66, 26)
 scale = Vector2(3, 3)
 texture = SubResource("AtlasTexture_6v43l")
+
+[node name="WeaponMarker" type="Marker2D" parent="ZombieWeapon"]
+position = Vector2(15.3333, 0)
+
+[node name="WeaponMarker2" type="Marker2D" parent="ZombieWeapon"]
+position = Vector2(15.3333, -2.33333)
+
+[node name="WeaponMarker3" type="Marker2D" parent="ZombieWeapon"]
+position = Vector2(15.3333, 1.66667)
 
 [node name="ZombieBossShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 20)
@@ -50,11 +125,21 @@ position = Vector2(-4, 6)
 shape = SubResource("CircleShape2D_id0gx")
 
 [node name="AttackArea" type="Area2D" parent="."]
+rotation = 0.0287733
 collision_layer = 32
 
 [node name="AttackShape" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(1, 18)
+position = Vector2(0.460308, 15.9934)
 shape = SubResource("CircleShape2D_uxbb8")
+
+[node name="ZombieBossNavigation" type="NavigationAgent2D" parent="."]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+navigation_layers = 2
+avoidance_enabled = true
+radius = 100.0
+neighbor_distance = 120.0
+time_horizon_agents = 0.5
 
 [node name="Timers" type="Node" parent="."]
 
@@ -63,10 +148,19 @@ one_shot = true
 
 [node name="VurnerableTimer" type="Timer" parent="Timers"]
 process_callback = 0
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
+[node name="MoveTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="NavigationTimer" type="Timer" parent="Timers"]
+process_callback = 0
+wait_time = 0.4
+autostart = true
+
 [node name="WalkTimer" type="Timer" parent="Timers"]
+process_callback = 0
 wait_time = 0.4
 one_shot = true
 
@@ -77,10 +171,18 @@ stream = ExtResource("3_221r3")
 stream = ExtResource("4_xlcyf")
 max_distance = 400.0
 
+[node name="StompPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="StompAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xlcyf")
+}
+
 [connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
 [connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/VurnerableTimer" to="." method="_on_vurnerable_timer_timeout"]
-[connection signal="timeout" from="Timers/WalkTimer" to="." method="_on_walk_timer_timeout"]
+[connection signal="timeout" from="Timers/MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="Timers/WalkTimer" to="." method="_on_vurnerable_timer_timeout"]

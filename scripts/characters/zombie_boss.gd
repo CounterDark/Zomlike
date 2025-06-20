@@ -13,44 +13,98 @@ extends CharacterBody2D
 @onready var vurnerable_timer: Timer = $Timers/VurnerableTimer
 @onready var attack_timer: Timer = $Timers/AttackTimer
 @onready var walk_timer: Timer = $Timers/WalkTimer
+@onready var move_timer: Timer = $Timers/MoveTimer
 
 @onready var hit_player : AudioStreamPlayer2D = $HitPlayer
 @onready var notice_player : AudioStreamPlayer2D = $NoticePlayer
 
-@onready var sprite : Sprite2D = $ZombieSprite
+@onready var stomp_animation : AnimationPlayer = $StompAnimation
 
-var can_attack : bool = true
+@onready var navigation_agent: NavigationAgent2D = $ZombieBossNavigation
+
+@onready var sprite : Sprite2D = $ZombieBossSprite
+@onready var gun_sprite : Sprite2D = $ZombieWeapon
+
+@onready var markers = $ZombieWeapon.get_children()
+
+
+var can_attack : bool = false
 var can_walk : bool = true
 var enemy_nearby : bool = false
 var vulnerable: bool = true
 var collided: bool = true
 var killed: bool = false
 
-var hit_animation_time : float = 0.15
+var stomp_radius: int = 400
+var hit_animation_time : float = 0.10
 var speed: int = default_speed
+
+const rotation_border : float = 89.0
+
+enum Moves {CHARGE, STOMP, SHOT, NONE}
+
+var selected_move : Moves = Moves.CHARGE
 
 func _ready() -> void:
 	_change_stats()
 	Difficulty.difficulty_change.connect(_on_difficulty_change)
 	
 func _physics_process(delta: float) -> void:
-	if can_walk:
-		var direction: Vector2
-		direction = (Globals.player_position - position).normalized()
-		velocity = direction * speed * delta
+	var direction: Vector2
+	if can_walk and enemy_nearby:
+		if selected_move == Moves.CHARGE:
+			direction = (Globals.player_position - position).normalized()
+			velocity = direction * speed * delta
+			
+			var collision : KinematicCollision2D = move_and_collide(velocity)
+			
+			if collision:
+				var collision_direction = collision.get_normal()
+				var reflect = collision.get_remainder().bounce(direction)
+				velocity = velocity.bounce(collision.get_normal()) * speed * delta * bounce_multiplier
+				move_and_collide(reflect)
+				var collider : Object = collision.get_collider()
+				if collider is Player:
+					SignalBus.player_collided.emit(global_position, collision_direction)
+					walk_timer.start()
+					can_walk = false
+	else:
+		var next_path_pos: Vector2 = navigation_agent.get_next_path_position()
+		direction = (next_path_pos - global_position).normalized()
+		velocity = direction * finding_speed * delta
+		move_and_collide(velocity)
 		
-		var collision : KinematicCollision2D = move_and_collide(velocity)
+
+func _process(_delta: float) -> void:
+	if can_attack and enemy_nearby:
+		if selected_move == Moves.SHOT:
+			var selected_marker : Marker2D = markers[randi() % markers.size()]
+			var current_direction : Vector2 = (Globals.player_position - markers[0].global_position).normalized()
+			var angle : float = current_direction.angle()
+			gun_sprite.rotation = angle
+			var direction : Vector2 =  (Globals.player_position - markers[0].global_position).normalized()
+			SignalBus.shot_zombie_bullet.emit(selected_marker.global_position, direction, round(ranged_damage * (1.0 if randf() > crit_chance else crit_multiplier)))
+			attack_timer.start(0.1)
+			can_attack = false
+		elif selected_move == Moves.STOMP:
+			var in_range : bool = Globals.player_position.distance_to(global_position) < stomp_radius
+			if in_range:
+				PlayerStats.health -= round(stomp_damage * (1.0 if randf() > crit_chance else crit_multiplier))
+			attack_timer.start(0.5)
+			can_attack = false
+	elif selected_move == Moves.STOMP:
+		can_attack = false
+		can_walk = false
+		stomp_animation.play("Stomp")
 		
-		if collision:
-			var collision_direction = collision.get_normal()
-			var reflect = collision.get_remainder().bounce(direction)
-			velocity = velocity.bounce(collision.get_normal()) * speed * delta * bounce_multiplier
-			move_and_collide(reflect)
-			var collider : Object = collision.get_collider()
-			if collider is Player:
-				SignalBus.player_collided.emit(global_position, collision_direction)
-				walk_timer.start()
-				can_walk = false
+	if selected_move == Moves.NONE:
+		selected_move = Moves[Moves.keys()[randi() % Moves.size()]]
+		move_timer.start()
+		can_attack = true
+		
+func stomp():
+	can_attack = true
+	can_walk = true
 
 func hit(hit_damage : int, hit_direction: Vector2, knockback: int) -> void:
 	if vulnerable:
@@ -71,6 +125,7 @@ func hit(hit_damage : int, hit_direction: Vector2, knockback: int) -> void:
 		tween.tween_property(sprite, "modulate", Color.RED, 0.25)
 		tween.tween_callback(self.queue_free)
 		PlayerStats.kill_count += 1
+		Globals.zabito_bossa = true
 
 		
 func _on_notice_area_body_entered(_body: Node2D) -> void:
@@ -99,6 +154,10 @@ func _on_attack_timer_timeout() -> void:
 func _on_walk_timer_timeout() -> void:
 	can_walk = true
 	
+func _on_move_timer_timeout() -> void:
+	selected_move = Moves.NONE
+	can_attack = false
+
 func _on_difficulty_change() -> void:
 	_change_stats()
 	
@@ -106,5 +165,5 @@ func _change_stats() -> void:
 	var stat_multiplier : float = Difficulty.get_stat_multiplier()
 	health = round(health * stat_multiplier)
 	damage = round(damage * stat_multiplier)
-	damage = round(damage * stat_multiplier)
-	damage = round(damage * stat_multiplier)
+	stomp_damage = round(stomp_damage * stat_multiplier)
+	ranged_damage = round(ranged_damage * stat_multiplier)

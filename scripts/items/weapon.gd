@@ -8,7 +8,7 @@ class_name Weapon
 @export var knockback : int
 
 var can_attack: bool = true
-var rotation_border : float = 89.0
+const rotation_border : float = 89.0
 
 @onready var attack_timer : Timer = $WeaponTimer
 

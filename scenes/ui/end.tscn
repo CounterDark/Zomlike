@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce3jgu404xjbm"]
+
+[ext_resource type="Script" uid="uid://bre6w5iyv6wpk" path="res://scripts/ui/end.gd" id="1_edqdv"]
+
+[sub_resource type="Theme" id="Theme_gjth3"]
+
+[node name="End" type="Control"]
+process_mode = 2
+visible = false
+layout_mode = 3
+anchors_preset = 0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gjth3")
+script = ExtResource("1_edqdv")
+
+[node name="EndLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CanvasModulate" type="ColorRect" parent="EndLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.87451)
+
+[node name="Container" type="VBoxContainer" parent="EndLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.32
+anchor_top = 0.399
+anchor_right = 0.673
+anchor_bottom = 0.631
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Win" type="Label" parent="EndLayer/Container"]
+layout_mode = 2
+text = "You win!"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="EndLayer/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="Return" type="Button" parent="EndLayer/Container/ButtonContainer"]
+layout_mode = 2
+action_mode = 0
+text = "Return to main menu"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="EndLayer/Container/ButtonContainer/Return" to="." method="_on_return_pressed"]

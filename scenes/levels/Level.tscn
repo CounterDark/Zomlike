@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://byv6ixi6qg4m"]
+[gd_scene load_steps=7 format=3 uid="uid://byv6ixi6qg4m"]
 
 [ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://Scenes/characters/Player.tscn" id="1_xlmfg"]
 [ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://Scenes/ui/control.tscn" id="2_04ab5"]
 [ext_resource type="PackedScene" uid="uid://nfppd3a8ikdb" path="res://Scenes/ui/exit.tscn" id="2_ji1vo"]
 [ext_resource type="PackedScene" uid="uid://cg1qd6jv58grv" path="res://Scenes/ui/equipment.tscn" id="3_04ab5"]
+[ext_resource type="PackedScene" uid="uid://ce3jgu404xjbm" path="res://Scenes/ui/end.tscn" id="5_nl803"]
 
 [sub_resource type="GDScript" id="GDScript_7c221"]
 script/source = "extends Node2D
@@ -11,13 +12,16 @@ class_name Level
 
 @onready var equipment_scene : Control = $Equipment
 @onready var exit_scene: Control = $Exit
+@onready var end_scene: Control = $End
 
 var bullet_scene: PackedScene = preload(\"res://Scenes/projectiles/Bullet.tscn\")
+var zombie_bullet_scene: PackedScene = preload(\"res://Scenes/projectiles/ZombieBullet.tscn\")
 var grenade_scene: PackedScene = preload(\"res://Scenes/projectiles/Grenade.tscn\")
 
 func _ready() -> void:
 	equipment_scene.hide()
 	exit_scene.hide()
+	SignalBus.connect(\"shot_zombie_bullet\", _on_shot_zombie_bullet)
 	SignalBus.connect(\"shot_bullet\", _on_shot_bullet)
 	SignalBus.connect(\"shot_grenade\", _on_shot_grenade)
 	if PlayerStats.time_start == 0:
@@ -25,12 +29,14 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	PlayerStats.time_played = Time.get_unix_time_from_system() - PlayerStats.time_start
+	if Globals.zabito_bossa:
+		end_scene.show()
+		get_tree().set_deferred(\"paused\", true)
 	if Input.is_action_just_pressed(\"pause\"):
 		pause()
 	if Input.is_action_just_pressed(\"exit\"):
 		exit_scene.show()
 		get_tree().set_deferred(\"paused\", true)
-
 
 func pause() -> void :
 	equipment_scene.show()
@@ -38,9 +44,20 @@ func pause() -> void :
 
 func _on_shot_bullet(bullet_position : Vector2, direction : Vector2, knockback : int) -> void :
 	create_bullet(bullet_position, direction, knockback)
+
+func _on_shot_zombie_bullet(bullet_position : Vector2, direction : Vector2, damage : int) -> void :
+	create_zombie_bullet(bullet_position, direction, damage)
 	
 func _on_shot_grenade(bullet_position : Vector2, direction : Vector2) -> void :
 	create_grenade(bullet_position, direction)
+
+func create_zombie_bullet(bullet_position : Vector2, direction : Vector2, damage : int)  -> void :
+	var zombie_bullet = zombie_bullet_scene.instantiate() as ZombieBullet
+	zombie_bullet.position = bullet_position
+	zombie_bullet.direction = direction
+	zombie_bullet.rotation = Globals.player_direction.angle() + Vector2.DOWN.angle()
+	zombie_bullet.attack_damage = damage
+	$Projectiles.add_child(zombie_bullet)
 
 func create_bullet(bullet_position : Vector2, direction : Vector2, knockback : int)  -> void :
 	var bullet = bullet_scene.instantiate() as Bullet
@@ -84,6 +101,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Equipment" parent="." instance=ExtResource("3_04ab5")]
+
+[node name="End" parent="." instance=ExtResource("5_nl803")]
 
 [connection signal="draw" from="." to="." method="_on_draw"]
 [connection signal="ready" from="." to="." method="_on_ready"]

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var default_speed: int = 300
-@export var finding_speed: int = 300
+@export var finding_speed: int = 200
 @export var damage : int = 10
 @export var crit_chance : float = 0.05
 @export var crit_multiplier : float = 1.5

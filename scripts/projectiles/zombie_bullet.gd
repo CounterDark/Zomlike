@@ -2,7 +2,7 @@ extends Area2D
 
 class_name ZombieBullet
 
-@export var speed: int = 1000
+@export var speed: int = 700
 
 var attack_damage: int = 0
 
