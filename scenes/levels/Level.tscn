@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://byv6ixi6qg4m"]
 
-[ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://scenes/characters/Player.tscn" id="1_xlmfg"]
-[ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://scenes/ui/control.tscn" id="2_04ab5"]
-[ext_resource type="PackedScene" uid="uid://nfppd3a8ikdb" path="res://scenes/ui/exit.tscn" id="2_ji1vo"]
-[ext_resource type="PackedScene" uid="uid://cg1qd6jv58grv" path="res://scenes/ui/equipment.tscn" id="3_04ab5"]
-[ext_resource type="PackedScene" path="res://Scenes/ui/end.tscn" id="5_nl803"]
+[ext_resource type="PackedScene" uid="uid://b4ahrc4wawpea" path="res://Scenes/characters/Player.tscn" id="1_xlmfg"]
+[ext_resource type="PackedScene" uid="uid://c6kym2228d601" path="res://Scenes/ui/control.tscn" id="2_04ab5"]
+[ext_resource type="PackedScene" uid="uid://nfppd3a8ikdb" path="res://Scenes/ui/exit.tscn" id="2_ji1vo"]
+[ext_resource type="PackedScene" uid="uid://cg1qd6jv58grv" path="res://Scenes/ui/equipment.tscn" id="3_04ab5"]
+[ext_resource type="PackedScene" uid="uid://ce3jgu404xjbm" path="res://Scenes/ui/end.tscn" id="5_nl803"]
 
 [sub_resource type="GDScript" id="GDScript_7c221"]
 script/source = "extends Node2D

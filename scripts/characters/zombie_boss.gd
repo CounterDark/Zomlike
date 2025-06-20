@@ -53,21 +53,18 @@ func _physics_process(delta: float) -> void:
 	var direction: Vector2
 	if can_walk and enemy_nearby:
 		if selected_move == Moves.CHARGE:
-			print_debug("charge")
 			direction = (Globals.player_position - position).normalized()
 			velocity = direction * speed * delta
 			
 			var collision : KinematicCollision2D = move_and_collide(velocity)
 			
 			if collision:
-				print_debug("Collision")
 				var collision_direction = collision.get_normal()
 				var reflect = collision.get_remainder().bounce(direction)
 				velocity = velocity.bounce(collision.get_normal()) * speed * delta * bounce_multiplier
 				move_and_collide(reflect)
 				var collider : Object = collision.get_collider()
 				if collider is Player:
-					print_debug("Player collide")
 					SignalBus.player_collided.emit(global_position, collision_direction)
 					walk_timer.start()
 					can_walk = false
@@ -80,9 +77,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if can_attack:
-		print_debug("attack")
 		if selected_move == Moves.SHOT:
-			print_debug("shot")
 			var selected_marker : Marker2D = markers[randi() % markers.size()]
 			var current_direction : Vector2 = (Globals.player_position - markers[0].global_position).normalized()
 			var angle : float = current_direction.angle()
@@ -92,14 +87,12 @@ func _process(_delta: float) -> void:
 			attack_timer.start(0.1)
 			can_attack = false
 		elif selected_move == Moves.STOMP:
-			print_debug("stomp")
 			var in_range : bool = Globals.player_position.distance_to(global_position) < stomp_radius
 			if in_range:
 				PlayerStats.health -= round(stomp_damage * (1.0 if randf() > crit_chance else crit_multiplier))
 			attack_timer.start(1.0)
 			can_attack = false
 	elif selected_move == Moves.STOMP:
-		print_debug("stomp")
 		can_attack = false
 		stomp_animation.play("Stomp")
 		

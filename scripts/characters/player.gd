@@ -69,8 +69,8 @@ func _on_collision_timer_timeout() -> void:
 
 func _on_weapon_change() -> void:
 	var new_weapon = PlayerInventory.get_equiped_node()
-	if new_weapon:
-		equipped_weapon = new_weapon
+	if new_weapon and new_weapon is PackedScene:
+		equipped_weapon = new_weapon.instantiate()
 		self.add_child(equipped_weapon)
 	else:
 		self.remove_child(equipped_weapon)
