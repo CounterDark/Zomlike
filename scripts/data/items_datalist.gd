@@ -10,5 +10,19 @@ var textures := {
 	"medpack": preload('res://resources/items/medpack.tres')
 }
 
+func get_node_for_id(id: String):
+	if id == "sword":
+		return preload('res://scenes/items/sword.tscn')
+	elif  id == "machine":
+		return preload('res://scenes/items/machine.tscn')
+	elif id == "machete":
+		return preload('res://scenes/items/machete.tscn')
+	elif id == "rifle":
+		return preload('res://scenes/items/assault_rifle.tscn')
+	elif id == "launcher":
+		return preload('res://scenes/items/granade_launcher.tscn')
+	else:
+		return null
+
 func get_texture(item_id):
 	return textures.get(item_id, null)

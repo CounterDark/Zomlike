@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dyo0ty6p06q2k" path="res://scenes/characters/Zombie.tscn" id="2_bmctr"]
 [ext_resource type="AudioStream" uid="uid://7khflrxl5g38" path="res://assets/audio/music/Graveyard.mp3" id="3_cx3j0"]
 [ext_resource type="TileSet" uid="uid://qktxrevgpxev" path="res://assets/tilemaps/walls.tres" id="3_no7sk"]
-[ext_resource type="PackedScene" uid="uid://0801sj87qdg8" path="res://Scenes/characters/ZombieBoss.tscn" id="5_no7sk"]
+[ext_resource type="PackedScene" uid="uid://0801sj87qdg8" path="res://scenes/characters/ZombieBoss.tscn" id="5_no7sk"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_vfl8y"]
 vertices = PackedVector2Array(937.359, -1080.95, 948.359, -1008.88, -247.781, -997.102, -244.789, -1139.89, -1874.08, -623.844, -1880.9, -1368.02, -824.539, -1370.97, -828.539, -1294.98, -1556.12, -618.852, -1445.78, -355.383, -1202.87, -370.367, -1198.89, -21, -254.82, -1296.02, -257.82, -1467.97, 945.57, -1465.02, 938.578, -1296, -1194.41, 364.047, -1881.9, 367.938, -1875.09, -370.523, -1552.87, -355.523, -1181.42, 149.039, -629.969, -21, -630.961, -335.039, 631.898, -340.953, 625.094, 374.969, -628.039, 146.961, 2524, -820.07, 2524, -42.0625, 1377.04, -48.9375, 1970.77, -824.07, 1380.95, -829.93, 1878, -826.938, 1981.76, -1296, 1878, -1085.04, -824.063, -1146.11, -821.047, -624.867, -1451.21, -616.867, -627.039, 372.023)
