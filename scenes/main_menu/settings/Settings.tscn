@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfvfny1kksiv5"]
+[gd_scene load_steps=5 format=3 uid="uid://bfvfny1kksiv5"]
 
+[ext_resource type="Script" uid="uid://vkoxydwvhpgf" path="res://scripts/ui/settings.gd" id="1_uvn8h"]
 [ext_resource type="Texture2D" uid="uid://bsp2ddhd702" path="res://assets/graphics/main_menu/background.png" id="1_xrhju"]
 [ext_resource type="Script" uid="uid://c5ipm07rhdea1" path="res://scripts/ui/option_button.gd" id="2_xxb37"]
 [ext_resource type="Script" uid="uid://8yxhgmmssrkk" path="res://scripts/ui/settings_back_button.gd" id="3_xxb37"]
@@ -11,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_uvn8h")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -67,6 +69,20 @@ grow_vertical = 2
 theme_override_constants/separation = 15
 alignment = 1
 
+[node name="Volume" type="Label" parent="UI/Controls/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="UI/Controls/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+
+[node name="Difficulty" type="Label" parent="UI/Controls/VBoxContainer"]
+layout_mode = 2
+text = "Difficulty"
+horizontal_alignment = 1
+
 [node name="OptionButton" type="OptionButton" parent="UI/Controls/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -89,4 +105,5 @@ text = "Back"
 language = "en"
 script = ExtResource("3_xxb37")
 
+[connection signal="value_changed" from="UI/Controls/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="item_selected" from="UI/Controls/VBoxContainer/OptionButton" to="UI/Controls/VBoxContainer/OptionButton" method="item_selected"]

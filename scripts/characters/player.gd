@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 			equipped_weapon.attack()
 	if PlayerStats.health <= 0 :
 		get_tree().change_scene_to_file("res://Scenes/main_menu/MainMenu.tscn")
-
+	
 
 func _physics_process(_delta: float) -> void:
 	if collided:

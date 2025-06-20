@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
-@export var default_speed: int = 300
+@export var default_speed: int = 400
 @export var finding_speed: int = 300
 @export var damage : int = 10
-@export var crit_chance : float = 0.05
+@export var stomp_damage : int = 20
+@export var ranged_damage : int = 5
+@export var crit_chance : float = 0.1
 @export var crit_multiplier : float = 1.5
 @export var bounce_multiplier : float = 3.0
-@export var health: int = 30
+@export var health: int = 2000
 
 @onready var vurnerable_timer: Timer = $Timers/VurnerableTimer
 @onready var attack_timer: Timer = $Timers/AttackTimer
@@ -103,4 +105,6 @@ func _on_difficulty_change() -> void:
 func _change_stats() -> void:
 	var stat_multiplier : float = Difficulty.get_stat_multiplier()
 	health = round(health * stat_multiplier)
+	damage = round(damage * stat_multiplier)
+	damage = round(damage * stat_multiplier)
 	damage = round(damage * stat_multiplier)

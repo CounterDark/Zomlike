@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b75pwuq1jm8ga"]
+
+[ext_resource type="Script" uid="uid://b5i7iqganysx6" path="res://scripts/projectiles/zombie_bullet.gd" id="1_xxr8v"]
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="2_wrgok"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7beao"]
+atlas = ExtResource("2_wrgok")
+region = Rect2(198, 11, 5, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7gv8"]
+size = Vector2(4, 6)
+
+[node name="ZombieBullet" type="Area2D"]
+collision_layer = 4
+collision_mask = 83
+script = ExtResource("1_xxr8v")
+
+[node name="ZombieBulletSprite" type="Sprite2D" parent="."]
+position = Vector2(4.45027e-10, 0)
+rotation = -1.57253
+texture = SubResource("AtlasTexture_7beao")
+
+[node name="ZombieBulletShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b7gv8")
+
+[node name="DestructTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="DestructTimer" to="." method="_on_destruct_timer_timeout"]
