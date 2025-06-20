@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://c57r8lhuyoy2s"]
+
+[ext_resource type="Texture2D" uid="uid://60mdt8777lk8" path="res://assets/sprites/weapons/weapons_spritesheet_1.png" id="1_j8uey"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wn7k0"]
+atlas = ExtResource("1_j8uey")
+region = Rect2(32, 22, 23, 6)
+
+[node name="InventoryItem" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_wn7k0")
+expand_mode = 2
+stretch_mode = 5

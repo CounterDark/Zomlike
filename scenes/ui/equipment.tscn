@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b278vlidv8gp2"]
+[gd_scene load_steps=3 format=3 uid="uid://cg1qd6jv58grv"]
 
 [ext_resource type="Script" uid="uid://dgugdrpbld7wm" path="res://scripts/ui/equipment.gd" id="1_r2f54"]
+[ext_resource type="Script" uid="uid://id6hvw4u44gh" path="res://scripts/ui/inventory_grid.gd" id="2_lh7a7"]
 
 [node name="Equipment" type="Control"]
 process_mode = 2
@@ -14,7 +15,6 @@ grow_vertical = 2
 script = ExtResource("1_r2f54")
 
 [node name="EquipmentLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Stats" type="GridContainer" parent="EquipmentLayer"]
 visible = false
@@ -31,5 +31,21 @@ layout_mode = 2
 [node name="KillCount" type="Label" parent="EquipmentLayer/Stats"]
 clip_contents = true
 layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="EquipmentLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 6
+script = ExtResource("2_lh7a7")
+rows = 8
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
