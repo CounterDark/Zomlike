@@ -14,14 +14,29 @@ atlas = ExtResource("2_1gybc")
 region = Rect2(0, 68, 38, 13)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kf7un"]
-radius = 83.0
-height = 210.0
+radius = 89.0
+height = 226.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_id0gx"]
-radius = 410.148
+radius = 730.055
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxbb8"]
 radius = 104.019
+
+[sub_resource type="Animation" id="Animation_6v43l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_221r3"]
 resource_name = "Stomp"
@@ -65,21 +80,6 @@ tracks/2/keys = {
 "args": [],
 "method": &"stomp"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_6v43l"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xlcyf"]
@@ -161,7 +161,7 @@ autostart = true
 
 [node name="WalkTimer" type="Timer" parent="Timers"]
 process_callback = 0
-wait_time = 0.4
+wait_time = 0.6
 one_shot = true
 
 [node name="NoticePlayer" type="AudioStreamPlayer2D" parent="."]
@@ -185,4 +185,5 @@ libraries = {
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="Timers/VurnerableTimer" to="." method="_on_vurnerable_timer_timeout"]
 [connection signal="timeout" from="Timers/MoveTimer" to="." method="_on_move_timer_timeout"]
+[connection signal="timeout" from="Timers/NavigationTimer" to="." method="_on_navigation_timer_timeout"]
 [connection signal="timeout" from="Timers/WalkTimer" to="." method="_on_vurnerable_timer_timeout"]

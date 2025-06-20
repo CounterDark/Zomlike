@@ -43,6 +43,7 @@ func _process(_delta: float) -> void:
 		if Input.is_action_pressed("primary action"):
 			equipped_weapon.attack()
 	if PlayerStats.health <= 0 :
+		PlayerStats.health = PlayerStats.max_health
 		get_tree().change_scene_to_file("res://Scenes/main_menu/MainMenu.tscn")
 	
 

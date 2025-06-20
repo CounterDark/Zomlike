@@ -95,6 +95,7 @@ func _on_attack_area_body_exited(_body: Node2D) -> void:
 
 func _on_notice_area_body_exited(_body: Node2D) -> void:
 	enemy_nearby = false
+	navigation_agent.target_position = Globals.player_position
 
 func _on_vurnerable_timer_timeout() -> void:
 	vulnerable = true
@@ -103,7 +104,8 @@ func _on_attack_timer_timeout() -> void:
 	can_attack = true
 
 func _on_navigation_timer_timeout() -> void:
-	navigation_agent.target_position = Globals.player_position
+	if !enemy_nearby:
+		navigation_agent.target_position = Globals.player_position
 
 func _on_walk_timer_timeout() -> void:
 	can_walk = true
