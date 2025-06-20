@@ -10,3 +10,4 @@ func _draw() -> void:
 		var id = PlayerInventory.get_at_index(i)
 		if id:
 			cell.set_item_by_id(id)
+		add_child(cell)
