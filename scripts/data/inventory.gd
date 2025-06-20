@@ -6,6 +6,8 @@ var items_ids: Array[String] = []
 
 var equiped_index: int = -1
 
+signal weapon_changed
+
 func can_add() -> bool:
 	return len(items_ids) < MAX_SLOTS
 
@@ -18,10 +20,12 @@ func remove_item(index: int):
 		items_ids.remove_at(index)
 		if equiped_index == index:
 			equiped_index = -1
+			weapon_changed.emit()
 
 func equip_item(index: int):
 	if index < len(items_ids):
 		equiped_index = index
+		weapon_changed.emit()
 
 func get_equiped_id():
 	if equiped_index < 0:
@@ -33,3 +37,12 @@ func get_at_index(index: int):
 		return items_ids[index]
 	else:
 		return null
+		
+func get_node_for_id(id: String):
+	return ItemsDatalist.get_node_for_id(id)
+
+func get_equiped_node():
+	if equiped_index < 0:
+		return null
+	else:
+		return ItemsDatalist.get_node_for_id(get_equiped_id())

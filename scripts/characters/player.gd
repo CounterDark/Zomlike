@@ -11,7 +11,11 @@ class_name Player
 var collided : bool = false
 var can_collide : bool = true
 
-var equipped_weapon : Weapon
+var equipped_weapon_id:
+	get():
+		return PlayerInventory.get_equiped_id()
+		
+var equipped_weapon: Weapon = null
 
 var speed: float = max_speed :
 	set(value):
@@ -23,27 +27,16 @@ var speed: float = max_speed :
 
 func _ready() -> void:
 	SignalBus.player_collided.connect(_on_player_collided)
-	#_equip_weapon(preload("res://Scenes/items/sword.tscn"))
-	#_equip_weapon(preload("res://Scenes/items/assault_rifle.tscn"))
-	_equip_weapon(preload("res://Scenes/items/granade_launcher.tscn"))
-
-func _equip_weapon(weapon_packed_scene: Resource) -> void:
-	var weapon : Node = weapon_packed_scene.instantiate()
-	if weapon is Weapon:
-		equipped_weapon = weapon
-		self.add_child(weapon)
-	
-func _unequip_weapon() -> void:
-	if equipped_weapon != null:
-		equipped_weapon.queue_free()
-		equipped_weapon = null
+	PlayerInventory.weapon_changed.connect(_on_weapon_change)
 
 func _process(_delta: float) -> void:
+	
 	if equipped_weapon != null:
 		if Input.is_action_pressed("primary action"):
 			equipped_weapon.attack()
 	if PlayerStats.health <= 0 :
 		get_tree().change_scene_to_file("res://Scenes/main_menu/MainMenu.tscn")
+		PlayerStats.reset()
 	
 
 func _physics_process(_delta: float) -> void:
@@ -72,3 +65,11 @@ func _on_reduced_speed_timer_timeout() -> void:
 
 func _on_collision_timer_timeout() -> void:
 	can_collide = true
+
+func _on_weapon_change() -> void:
+	var new_weapon = PlayerInventory.get_equiped_node()
+	if new_weapon:
+		equipped_weapon = new_weapon
+		self.add_child(equipped_weapon)
+	else:
+		self.remove_child(equipped_weapon)

@@ -51,3 +51,14 @@ var health_kit_amount : int = 5:
 func player_invulnerable_timer() -> void :
 	await get_tree().create_timer(INVURNERABLE_TIME).timeout
 	player_invulnerable = false
+	
+func reset() -> void:
+	player_invulnerable = false
+	time_played = 0
+	time_start = 0
+	health = max_health
+	kill_count = 0
+	damage = base_damage
+	crit_chance = base_crit_chance
+	armor = base_armor
+	stat_change.emit()
