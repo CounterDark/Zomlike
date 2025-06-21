@@ -26,6 +26,10 @@ func equip_item(index: int) -> void:
 	if index < len(items_ids):
 		equiped_index = index
 		weapon_changed.emit()
+		
+func unequip_item() -> void:
+	equiped_index = -1
+	weapon_changed.emit()
 
 func get_equiped_id() -> Variant:
 	if equiped_index < 0:
@@ -46,3 +50,7 @@ func get_equiped_node() -> Variant:
 		return null
 	else:
 		return ItemsDatalist.get_node_for_id(get_equiped_id())
+
+func reset():
+	items_ids.clear()
+	equiped_index = -1

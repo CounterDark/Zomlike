@@ -1,7 +1,7 @@
 extends Weapon
 
-@onready var bullet_marker : Marker2D = $GrenadeMarker 
-@onready var shot_sound : AudioStreamPlayer2D = $GrenadeLaunchSound
+@onready var bullet_marker : Marker2D = $BulletMarker 
+@onready var shot_sound : AudioStreamPlayer2D = $BulletSound
 
 func attack() -> void:
 	if can_attack:

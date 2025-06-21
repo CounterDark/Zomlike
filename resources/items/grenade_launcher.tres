@@ -8,4 +8,3 @@ region = Rect2(48, 65, 34, 15)
 
 [resource]
 atlas = SubResource("AtlasTexture_q5le8")
-region = Rect2(32, 86, 30, 10)

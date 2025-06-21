@@ -12,12 +12,13 @@ atlas = ExtResource("2_pmkm2")
 region = Rect2(280, 722, 17, 21)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ggen"]
-radius = 96.0208
+radius = 100.0
 
-[node name="Chest" type="Node2D" node_paths=PackedStringArray("closedSprite", "openedSprite")]
+[node name="Chest" type="Node2D" node_paths=PackedStringArray("closedSprite", "openedSprite", "label")]
 script = ExtResource("1_1ggen")
 closedSprite = NodePath("ChestClosed")
 openedSprite = NodePath("ChestOpen")
+label = NodePath("Label")
 
 [node name="ChestClosed" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -25,10 +26,12 @@ texture = SubResource("AtlasTexture_6q0jp")
 
 [node name="ChestOpen" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, -4)
+position = Vector2(0, -17)
+scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_7j3y6")
 
 [node name="OpeningArea" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OpeningArea"]
 shape = SubResource("CircleShape2D_1ggen")
@@ -40,3 +43,6 @@ offset_top = -69.0
 offset_right = 25.0
 offset_bottom = -46.0
 text = "Open?"
+
+[connection signal="body_entered" from="OpeningArea" to="." method="_on_opening_area_body_entered"]
+[connection signal="body_exited" from="OpeningArea" to="." method="_on_opening_area_body_exited"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://be6or40lpk38x"]
+
+[ext_resource type="Script" uid="uid://bnlwhu0ru5fye" path="res://scripts/objects/exit.gd" id="1_f07mt"]
+[ext_resource type="Texture2D" uid="uid://cvkl8bqto7jpq" path="res://assets/sprites/objects/objects_sprite_sheet.png" id="2_pkj15"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f07mt"]
+atlas = ExtResource("2_pkj15")
+region = Rect2(22.6735, 537.753, 21.3704, 17.457)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1ggen"]
+radius = 100.0
+
+[node name="Exit" type="Node2D" node_paths=PackedStringArray("label")]
+script = ExtResource("1_f07mt")
+label = NodePath("Label")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -17)
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_f07mt")
+
+[node name="OpeningArea" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OpeningArea"]
+shape = SubResource("CircleShape2D_1ggen")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -25.0
+offset_top = -69.0
+offset_right = 25.0
+offset_bottom = -46.0
+text = "Open?"
+
+[connection signal="body_entered" from="OpeningArea" to="." method="_on_opening_area_body_entered"]
+[connection signal="body_exited" from="OpeningArea" to="." method="_on_opening_area_body_exited"]

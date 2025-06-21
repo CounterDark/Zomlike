@@ -10,6 +10,10 @@ var textures := {
 	"medpack": preload('res://resources/items/medpack.tres')
 }
 
+var ids_list:
+	get():
+		return textures.keys()
+
 func get_node_for_id(id: String):
 	if id == "sword":
 		return preload('res://scenes/items/sword.tscn')

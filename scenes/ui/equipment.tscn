@@ -17,6 +17,7 @@ script = ExtResource("1_r2f54")
 [node name="EquipmentLayer" type="CanvasLayer" parent="."]
 
 [node name="GridContainer" type="GridContainer" parent="EquipmentLayer"]
+process_mode = 2
 visible = false
 clip_contents = true
 anchors_preset = -1

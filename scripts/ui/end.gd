@@ -14,4 +14,7 @@ func _on_visibility_changed() -> void:
 
 func _on_return_pressed() -> void:
 	get_tree().paused = false
+	PlayerInventory.reset()
+	PlayerStats.reset()
+	Globals.reset()
 	get_tree().change_scene_to_file("res://Scenes/main_menu/MainMenu.tscn")
