@@ -1,3 +1,19 @@
-Functionalities:
- - Main menu
- - difficulty
+ - menu główne
+ - poziom trudności
+ - zmiana głośności
+ - muzyka
+ - przeciwnik podstawowy
+ - boss
+ - bron strzelajaca pociskami
+ - bron wręcz
+ - bron wybuchowa
+ - losowanie przedmiotu
+ - ekwipunek
+ - możliwość zmiany broni
+ - statystki postaci
+ - pauza
+ - statystki rozgrywki
+ - efekty dzwiękowe
+ - kolizje przy walce
+ - animacje
+ - ekran wygranej
