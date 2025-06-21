@@ -28,6 +28,7 @@ var speed: float = max_speed :
 func _ready() -> void:
 	SignalBus.player_collided.connect(_on_player_collided)
 	PlayerInventory.weapon_changed.connect(_on_weapon_change)
+	_on_weapon_change()
 
 func _process(_delta: float) -> void:
 	if equipped_weapon != null:

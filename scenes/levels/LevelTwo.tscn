@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://b21va46kbomw4"]
+[gd_scene load_steps=6 format=4 uid="uid://b21va46kbomw4"]
 
 [ext_resource type="PackedScene" uid="uid://byv6ixi6qg4m" path="res://scenes/levels/Level.tscn" id="1_kygrk"]
 [ext_resource type="TileSet" uid="uid://bbtu8j6y5thxo" path="res://assets/tilemaps/floor.tres" id="2_obrxj"]
 [ext_resource type="TileSet" uid="uid://qktxrevgpxev" path="res://assets/tilemaps/walls.tres" id="3_5732n"]
 [ext_resource type="PackedScene" uid="uid://0801sj87qdg8" path="res://scenes/characters/ZombieBoss.tscn" id="4_5732n"]
+[ext_resource type="AudioStream" uid="uid://7khflrxl5g38" path="res://assets/audio/music/Graveyard.mp3" id="5_kw6th"]
 
 [node name="Level" instance=ExtResource("1_kygrk")]
 
@@ -24,3 +25,9 @@ tile_set = ExtResource("3_5732n")
 
 [node name="ZombieBoss" parent="Enemies" index="0" instance=ExtResource("4_5732n")]
 position = Vector2(-19.368, -941.169)
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." index="9"]
+stream = ExtResource("5_kw6th")
+autoplay = true
+max_distance = 4096.0
+parameters/looping = true
