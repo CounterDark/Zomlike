@@ -6,7 +6,7 @@ signal stat_change
 @export var base_damage : int = 5
 @export var base_crit_chance : float = 0.1
 @export var crit_multiplier: float = 1.5
-@export var base_armor : int = 10
+@export var base_armor : int = 3
 
 const INVURNERABLE_TIME : float = 0.4
 
@@ -34,11 +34,11 @@ var ranged_damage : int = 0
 
 var health : int = max_health:
 	set(value):
-		if value > health:
+		if value >= health:
 			health = min(value, max_health)
 		else:
 			if !player_invulnerable:
-				health = value - armor
+				health = min(value + armor, health)
 				player_invulnerable = true
 				player_invulnerable_timer()
 		stat_change.emit()

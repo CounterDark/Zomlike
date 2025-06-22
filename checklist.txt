@@ -17,3 +17,4 @@
  - kolizje przy walce
  - animacje
  - ekran wygranej
+ - resetowanie stanu gry po zakończeniu rozgrywki

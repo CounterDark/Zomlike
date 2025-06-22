@@ -45,5 +45,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 tooltip_text = "Health"
+value = 100.0
 texture_under = SubResource("GradientTexture1D_5xh3h")
 texture_progress = SubResource("GradientTexture1D_h7swn")

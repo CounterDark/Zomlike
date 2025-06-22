@@ -7,3 +7,5 @@ var zabito_bossa: bool = false
 
 func reset():
 	zabito_bossa = false
+	player_position = Vector2()
+	weapon_position = Vector2()
